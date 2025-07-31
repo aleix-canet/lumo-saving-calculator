@@ -1,14 +1,15 @@
 import { Slider, type SliderProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { colors } from '../constants/colors';
 
 const CustomSlider = styled(Slider)<SliderProps>(() => ({
-  color: '#1FEA71',
+  color: colors.lumoGreen,
   height: 4,
   '& .MuiSlider-thumb': {
     height: 24,
     width: 24,
     backgroundColor: 'white',
-    border: '2px solid #1FEA71',
+    border: `2px solid ${colors.lumoGreen}`,
     boxShadow: '0px 0px 4px rgba(0,0,0,0.15)',
     '&:hover, &.Mui-focusVisible, &.Mui-active': {
       boxShadow: '0px 0px 6px rgba(0,0,0,0.25)',
@@ -19,7 +20,7 @@ const CustomSlider = styled(Slider)<SliderProps>(() => ({
     opacity: 1,
   },
   '& .MuiSlider-track': {
-    backgroundColor: '#1FEA71',
+    backgroundColor: colors.lumoGreen,
     border: 'none',
   },
   '& .MuiSlider-valueLabel': {
