@@ -4,8 +4,8 @@ import {
   Cell,
   LabelList,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
+  YAxis,
 } from 'recharts';
 import { colors } from '../../constants/colors';
 
@@ -29,7 +29,7 @@ const AnnualSavingsChart: React.FC = () => {
   ];
 
   return (
-    <div className="w-full max-w-sm h-[250px] mx-auto">
+    <div className="w-full max-w-sm h-[360px] mx-auto">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
@@ -41,15 +41,14 @@ const AnnualSavingsChart: React.FC = () => {
             tickLine={false}
             tick={{ fontSize: 12 }}
           />
-          <Tooltip
-            formatter={(value: number) => `£${value}`}
-            cursor={{ fill: 'transparent' }}
-          />
+          <YAxis hide domain={[0, 1600]} />
           <Bar dataKey="savings" radius={[6, 6, 0, 0]}>
             <LabelList
               dataKey="savings"
               position="top"
-              formatter={(val: number) => `£${val}`}
+              formatter={(label: React.ReactNode) =>
+                typeof label === 'number' ? `£${label}` : label
+              }
               style={{ fill: '#111', fontWeight: 600 }}
             />
             {data.map((entry, index) => (

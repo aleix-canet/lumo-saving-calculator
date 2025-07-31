@@ -1,16 +1,19 @@
 import Chip from '@mui/material/Chip';
 import { useState } from 'react';
 import CustomSlider from '../../components/CustomSlider';
+import { CustomTab, CustomTabs } from '../../components/CustomTabs';
 import AnnualSavingsChart from './AnnualSavingsChart';
 
 const SavingsCalculator = () => {
   const [solarPanels, setSolarPanels] = useState(12);
   const [batterySize, setBatterySize] = useState(10);
+  const [chartTabIndex, setChartTabIndex] = useState(0);
+
   // Consider changing to max-w-sm....
   return (
     <div className="min-h-screen bg-white grid grid-rows-[auto_auto]">
       <main className="flex items-center justify-center w-full px-4">
-        <div className="flex flex-row items-start justify-between w-full max-w-screen-xl gap-16">
+        <div className="flex flex-row items-end justify-between w-full max-w-screen-xl gap-16">
           <div id="left-container" className="flex flex-col gap-16 flex-1">
             <div
               id="text-container"
@@ -61,7 +64,28 @@ const SavingsCalculator = () => {
             id="right-container"
             className="w-full max-w-sm flex justify-center"
           >
-            <AnnualSavingsChart />
+            <div className="w-full max-w-sm h-[320px] flex flex-col justify-end">
+              <div className="flex-1 flex items-end">
+                {chartTabIndex === 0 ? (
+                  <AnnualSavingsChart />
+                ) : (
+                  <div className="text-center text-gray-400 text-sm w-full">
+                    Tab2 content
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-3">
+                <CustomTabs
+                  value={chartTabIndex}
+                  onChange={(_, newValue) => setChartTabIndex(newValue)}
+                  centered
+                >
+                  <CustomTab label="Annual savings" />
+                  <CustomTab label="Lifetime savings" />
+                </CustomTabs>
+              </div>
+            </div>
           </div>
         </div>
       </main>
