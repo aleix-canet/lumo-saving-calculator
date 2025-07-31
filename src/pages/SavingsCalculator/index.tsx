@@ -3,6 +3,7 @@ import { useState } from 'react';
 import CustomSlider from '../../components/CustomSlider';
 import { CustomTab, CustomTabs } from '../../components/CustomTabs';
 import AnnualSavingsChart from './AnnualSavingsChart';
+import LifetimeSavingsChart from './LifetimeSavingsChart';
 
 const SavingsCalculator = () => {
   const [solarPanels, setSolarPanels] = useState(12);
@@ -70,7 +71,7 @@ const SavingsCalculator = () => {
                   <AnnualSavingsChart />
                 ) : (
                   <div className="text-center text-gray-400 text-sm w-full">
-                    Tab2 content
+                    <LifetimeSavingsChart />
                   </div>
                 )}
               </div>
@@ -91,17 +92,23 @@ const SavingsCalculator = () => {
       </main>
 
       <footer className="border-t border-gray-200 py-4 px-4">
-        <div className="w-full flex items-center gap-2 justify-center">
-          <div className="text-sm text-gray-500">
-            Total system cost:{' '}
-            <span className="font-medium text-black">£9,000</span>
+        <div className="w-full flex items-center gap-6 justify-center">
+          <div>
+            <span className="text-gray-700 text-lg font-normal underline">
+              Total system cost:{' '}
+            </span>
+            <span className="text-zinc-900 text-lg font-normal">£9,000</span>
           </div>
           <div>
-            <span className="text-sm text-gray-500">Monthly bill cost: </span>
-            <span className="font-medium text-black">£87</span>
+            <span className="text-gray-700 text-lg font-normal underline">
+              Monthly bill cost:{' '}
+            </span>
+            <span className="text-zinc-900 text-lg font-normal">£87</span>
           </div>
-          <button className="bg-green-500 text-white text-sm px-4 py-2 rounded hover:bg-green-600 transition">
-            Get your free quote
+          <button className="px-8 py-5 bg-[#1FEA71]! rounded-[52px]">
+            <span className="text-zinc-900 text-lg font-medium">
+              Get your free quote
+            </span>
           </button>
         </div>
       </footer>
