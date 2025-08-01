@@ -7,7 +7,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { colors } from '../../constants/colors';
+import { colors } from '../../../constants/colors';
 
 const LifetimeSavingsChart = ({
   lumoSolarAndBattery,

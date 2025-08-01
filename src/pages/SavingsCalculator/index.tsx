@@ -3,19 +3,21 @@ import { useState } from 'react';
 import AnimatedCustomSlider from '../../components/CustomSlider';
 import { CustomTab, CustomTabs } from '../../components/CustomTabs';
 import { useSavingsCalculations } from '../../hooks/useSavingsCalculator';
-import AnnualSavingsChart from './AnnualSavingsChart';
-import LifetimeSavingsChart from './LifetimeSavingsChart';
+import AnnualSavingsChart from './components/AnnualSavingsChart';
+import BedroomSelector from './components/BedroomsSelector';
+import LifetimeSavingsChart from './components/LifetimeSavingsChart';
 
 const SavingsCalculator = () => {
   const [solarPanels, setSolarPanels] = useState(12);
   const [batterySize, setBatterySize] = useState(10);
+  const [numberOfBedrooms, setNumberOfBedrooms] = useState(2);
   const [chartTabIndex, setChartTabIndex] = useState(0);
 
   const { solarOnly, solarAndBattery, lumoSolarAndBattery } =
     useSavingsCalculations({
       solarPanels,
       batterySize,
-      numberOfBedrooms: 2,
+      numberOfBedrooms,
     });
 
   // Consider changing to max-w-sm....
@@ -39,7 +41,12 @@ const SavingsCalculator = () => {
               </h1>
               <h2 className="text-gray-500 text-3xl font-light">
                 With {solarPanels} solar panels and a {batterySize}kWh battery
-                in a 2 bed home optimised by Lumo
+                in a{' '}
+                <BedroomSelector
+                  numberOfBedrooms={numberOfBedrooms}
+                  setNumberOfBedrooms={setNumberOfBedrooms}
+                />{' '}
+                home optimised by Lumo
               </h2>
             </div>
             <div
