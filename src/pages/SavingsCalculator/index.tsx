@@ -1,6 +1,6 @@
 import Chip from '@mui/material/Chip';
 import { useState } from 'react';
-import CustomSlider from '../../components/CustomSlider';
+import AnimatedCustomSlider from '../../components/CustomSlider';
 import { CustomTab, CustomTabs } from '../../components/CustomTabs';
 import AnnualSavingsChart from './AnnualSavingsChart';
 import LifetimeSavingsChart from './LifetimeSavingsChart';
@@ -38,10 +38,9 @@ const SavingsCalculator = () => {
               id="sliders-container"
               className="flex flex-col gap-8 w-full max-w-[50%]"
             >
-              <CustomSlider
-                value={solarPanels}
-                onChange={(_, value) => setSolarPanels(value as number)}
-                valueLabelDisplay="on"
+              <AnimatedCustomSlider
+                targetValue={solarPanels}
+                onSliderChange={setSolarPanels}
                 min={0}
                 max={16}
                 step={4}
@@ -49,10 +48,9 @@ const SavingsCalculator = () => {
                 valueLabelFormat={v => `${v} solar panels`}
                 className="mb-5"
               />
-              <CustomSlider
-                value={batterySize}
-                onChange={(_, value) => setBatterySize(value as number)}
-                valueLabelDisplay="on"
+              <AnimatedCustomSlider
+                targetValue={batterySize}
+                onSliderChange={setBatterySize}
                 min={0}
                 max={20}
                 step={5}
@@ -95,15 +93,15 @@ const SavingsCalculator = () => {
         <div className="w-full flex items-center gap-6 justify-center">
           <div>
             <span className="text-gray-700 text-lg font-normal underline">
-              Total system cost:{' '}
+              Total system cost:
             </span>
-            <span className="text-zinc-900 text-lg font-normal">£9,000</span>
+            <span className="text-zinc-900 text-lg font-normal"> £9,000</span>
           </div>
           <div>
             <span className="text-gray-700 text-lg font-normal underline">
-              Monthly bill cost:{' '}
+              Monthly bill cost:
             </span>
-            <span className="text-zinc-900 text-lg font-normal">£87</span>
+            <span className="text-zinc-900 text-lg font-normal"> £87</span>
           </div>
           <button className="px-8 py-5 bg-[#1FEA71]! rounded-[52px]">
             <span className="text-zinc-900 text-lg font-medium">

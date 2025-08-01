@@ -1,5 +1,6 @@
 import { Slider, type SliderProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import { colors } from '../constants/colors';
 
 const CustomSlider = styled(Slider)<SliderProps>(() => ({
@@ -35,4 +36,69 @@ const CustomSlider = styled(Slider)<SliderProps>(() => ({
   },
 }));
 
-export default CustomSlider;
+interface AnimatedCustomSliderProps extends SliderProps {
+  targetValue: number;
+  step: number;
+  min: number;
+  max: number;
+  duration?: number;
+  onSliderChange: (value: number) => void;
+  valueLabelFormat?: (value: number) => string;
+  'aria-label'?: string;
+}
+
+const AnimatedCustomSlider = ({
+  targetValue,
+  step,
+  min,
+  max,
+  duration = 500,
+  onSliderChange,
+  valueLabelFormat,
+  ...rest
+}: AnimatedCustomSliderProps) => {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    let start: number | null = null;
+    const animate = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+
+      const newValue = Math.min(
+        min + ((targetValue - min) * progress) / duration,
+        targetValue,
+      );
+
+      const rounded = Math.round(newValue / step) * step;
+      setValue(rounded);
+
+      if (newValue < targetValue) {
+        requestAnimationFrame(animate);
+      } else {
+        onSliderChange(targetValue);
+      }
+    };
+
+    requestAnimationFrame(animate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <CustomSlider
+      value={value}
+      onChange={(_, val) => {
+        setValue(val as number);
+        onSliderChange(val as number);
+      }}
+      min={min}
+      max={max}
+      step={step}
+      valueLabelDisplay="on"
+      valueLabelFormat={valueLabelFormat}
+      {...rest}
+    />
+  );
+};
+
+export default AnimatedCustomSlider;
