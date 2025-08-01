@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getPermutationsData } from '../data/permutations';
-import type { Permutations } from '../types/Permutations';
-import type { SavingsCalculations } from '../types/SavingsCalculations';
+import { getSavingsPermutationsData } from '../data/permutations';
+import type { SavingsCalculations } from '../types/Calculations';
+import type { SavingsPermutations } from '../types/Permutations';
 
 interface useSavingsCalculationsProps {
   solarPanels: number;
@@ -14,12 +14,12 @@ export const useSavingsCalculations = ({
   batterySize,
   numberOfBedrooms,
 }: useSavingsCalculationsProps): SavingsCalculations => {
-  const [data, setData] = useState<Permutations>();
+  const [data, setData] = useState<SavingsPermutations>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const permutations = await getPermutationsData();
+        const permutations = await getSavingsPermutationsData();
         setData(permutations);
       } catch (error) {
         console.error('Failed to fetch permutations data:', error);

@@ -8,7 +8,7 @@ import {
   YAxis,
 } from 'recharts';
 import { colors } from '../../../constants/colors';
-import type { SavingsCalculations } from '../../../types/SavingsCalculations';
+import type { SavingsCalculations } from '../../../types/Calculations';
 
 const AnnualSavingsChart = ({
   solarOnly,

@@ -1,8 +1,16 @@
-import { useState } from "react";
-import FinanceConfigDialog from "./FinanceConfigDialog";
+import { useState } from 'react';
+import { useFinanceCalculations } from '../../../hooks/useFinanceCalculations';
+import FinanceConfigDialog from './FinanceConfigDialog';
 
 const Footer = () => {
-      const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
+  const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
+  const [depositSize, setDepositSize] = useState(0);
+  const [yearsFinanced, setYearsFinanced] = useState(10);
+
+  const { totalSystemCost, monthlyBill } = useFinanceCalculations({
+    depositSize,
+    yearsFinanced,
+  });
 
   return (
     <footer className="border-t border-gray-200 py-4 px-4">
@@ -14,7 +22,10 @@ const Footer = () => {
           <span className="text-gray-700 text-lg font-normal underline">
             Total system cost:
           </span>
-          <span className="text-zinc-900 text-lg font-normal"> £9,000</span>
+          <span className="text-zinc-900 text-lg font-normal">
+            {' '}
+            £{totalSystemCost}
+          </span>
         </button>
         <button
           onClick={() => setIsOpenFinanceDialog(true)}
@@ -23,7 +34,10 @@ const Footer = () => {
           <span className="text-gray-700 text-lg font-normal underline">
             Monthly bill cost:
           </span>
-          <span className="text-zinc-900 text-lg font-normal"> £87</span>
+          <span className="text-zinc-900 text-lg font-normal">
+            {' '}
+            £{monthlyBill}
+          </span>
         </button>
         <button className="px-8 py-5 bg-[#1FEA71]! rounded-[52px]">
           <span className="text-zinc-900 text-lg font-medium">
@@ -34,6 +48,12 @@ const Footer = () => {
       <FinanceConfigDialog
         open={isOpenFinanceDialog}
         onClose={() => setIsOpenFinanceDialog(false)}
+        onDepositSizeChange={setDepositSize}
+        onYearsFinancedChange={setYearsFinanced}
+        totalSystemCost={totalSystemCost}
+        monthlyBill={monthlyBill}
+        depositSize={depositSize}
+        yearsFinanced={yearsFinanced}
       />
     </footer>
   );

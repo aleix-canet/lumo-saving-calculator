@@ -1,7 +1,8 @@
-import type { SavingsCalculations } from '../types/SavingsCalculations';
+import type { SavingsCalculations } from '../types/Calculations';
+import type { FinancePermutations } from '../types/Permutations';
 
 // index key: solarPanels-batterySize-bedrooms
-export const mockedPermutations: Record<string, SavingsCalculations> = {
+export const mockedSavingsPermutations: Record<string, SavingsCalculations> = {
   '4-5-1': {
     solarOnly: 209,
     solarAndBattery: 331,
@@ -4761,5 +4762,248 @@ export const mockedPermutations: Record<string, SavingsCalculations> = {
     solarOnly: 1406,
     solarAndBattery: 2219,
     lumoSolarAndBattery: 3549,
+  },
+};
+
+export const mockedFinancePermutations: Record<string, FinancePermutations> = {
+  '0-0': {
+    totalSystemCost: 9000,
+    monthlyBill: 0,
+  },
+  '0-2': {
+    totalSystemCost: 9000,
+    monthlyBill: 375,
+  },
+  '0-3': {
+    totalSystemCost: 9000,
+    monthlyBill: 250,
+  },
+  '0-5': {
+    totalSystemCost: 9000,
+    monthlyBill: 150,
+  },
+  '0-10': {
+    totalSystemCost: 9000,
+    monthlyBill: 75,
+  },
+  '0-15': {
+    totalSystemCost: 9000,
+    monthlyBill: 50,
+  },
+  '1000-0': {
+    totalSystemCost: 8000,
+    monthlyBill: 0,
+  },
+  '1000-2': {
+    totalSystemCost: 8000,
+    monthlyBill: 333,
+  },
+  '1000-3': {
+    totalSystemCost: 8000,
+    monthlyBill: 222,
+  },
+  '1000-5': {
+    totalSystemCost: 8000,
+    monthlyBill: 133,
+  },
+  '1000-10': {
+    totalSystemCost: 8000,
+    monthlyBill: 66,
+  },
+  '1000-15': {
+    totalSystemCost: 8000,
+    monthlyBill: 44,
+  },
+  '2000-0': {
+    totalSystemCost: 7000,
+    monthlyBill: 0,
+  },
+  '2000-2': {
+    totalSystemCost: 7000,
+    monthlyBill: 291,
+  },
+  '2000-3': {
+    totalSystemCost: 7000,
+    monthlyBill: 194,
+  },
+  '2000-5': {
+    totalSystemCost: 7000,
+    monthlyBill: 116,
+  },
+  '2000-10': {
+    totalSystemCost: 7000,
+    monthlyBill: 58,
+  },
+  '2000-15': {
+    totalSystemCost: 7000,
+    monthlyBill: 38,
+  },
+  '3000-0': {
+    totalSystemCost: 6000,
+    monthlyBill: 0,
+  },
+  '3000-2': {
+    totalSystemCost: 6000,
+    monthlyBill: 250,
+  },
+  '3000-3': {
+    totalSystemCost: 6000,
+    monthlyBill: 166,
+  },
+  '3000-5': {
+    totalSystemCost: 6000,
+    monthlyBill: 100,
+  },
+  '3000-10': {
+    totalSystemCost: 6000,
+    monthlyBill: 50,
+  },
+  '3000-15': {
+    totalSystemCost: 6000,
+    monthlyBill: 33,
+  },
+  '4000-0': {
+    totalSystemCost: 5000,
+    monthlyBill: 0,
+  },
+  '4000-2': {
+    totalSystemCost: 5000,
+    monthlyBill: 208,
+  },
+  '4000-3': {
+    totalSystemCost: 5000,
+    monthlyBill: 138,
+  },
+  '4000-5': {
+    totalSystemCost: 5000,
+    monthlyBill: 83,
+  },
+  '4000-10': {
+    totalSystemCost: 5000,
+    monthlyBill: 41,
+  },
+  '4000-15': {
+    totalSystemCost: 5000,
+    monthlyBill: 27,
+  },
+  '5000-0': {
+    totalSystemCost: 4000,
+    monthlyBill: 0,
+  },
+  '5000-2': {
+    totalSystemCost: 4000,
+    monthlyBill: 166,
+  },
+  '5000-3': {
+    totalSystemCost: 4000,
+    monthlyBill: 111,
+  },
+  '5000-5': {
+    totalSystemCost: 4000,
+    monthlyBill: 66,
+  },
+  '5000-10': {
+    totalSystemCost: 4000,
+    monthlyBill: 33,
+  },
+  '5000-15': {
+    totalSystemCost: 4000,
+    monthlyBill: 22,
+  },
+  '6000-0': {
+    totalSystemCost: 3000,
+    monthlyBill: 0,
+  },
+  '6000-2': {
+    totalSystemCost: 3000,
+    monthlyBill: 125,
+  },
+  '6000-3': {
+    totalSystemCost: 3000,
+    monthlyBill: 83,
+  },
+  '6000-5': {
+    totalSystemCost: 3000,
+    monthlyBill: 50,
+  },
+  '6000-10': {
+    totalSystemCost: 3000,
+    monthlyBill: 25,
+  },
+  '6000-15': {
+    totalSystemCost: 3000,
+    monthlyBill: 16,
+  },
+  '7000-0': {
+    totalSystemCost: 2000,
+    monthlyBill: 0,
+  },
+  '7000-2': {
+    totalSystemCost: 2000,
+    monthlyBill: 83,
+  },
+  '7000-3': {
+    totalSystemCost: 2000,
+    monthlyBill: 55,
+  },
+  '7000-5': {
+    totalSystemCost: 2000,
+    monthlyBill: 33,
+  },
+  '7000-10': {
+    totalSystemCost: 2000,
+    monthlyBill: 16,
+  },
+  '7000-15': {
+    totalSystemCost: 2000,
+    monthlyBill: 11,
+  },
+  '8000-0': {
+    totalSystemCost: 1000,
+    monthlyBill: 0,
+  },
+  '8000-2': {
+    totalSystemCost: 1000,
+    monthlyBill: 41,
+  },
+  '8000-3': {
+    totalSystemCost: 1000,
+    monthlyBill: 27,
+  },
+  '8000-5': {
+    totalSystemCost: 1000,
+    monthlyBill: 16,
+  },
+  '8000-10': {
+    totalSystemCost: 1000,
+    monthlyBill: 8,
+  },
+  '8000-15': {
+    totalSystemCost: 1000,
+    monthlyBill: 5,
+  },
+  '9000-0': {
+    totalSystemCost: 0,
+    monthlyBill: 0,
+  },
+  '9000-2': {
+    totalSystemCost: 0,
+    monthlyBill: 1,
+  },
+  '9000-3': {
+    totalSystemCost: 0,
+    monthlyBill: 1,
+  },
+  '9000-5': {
+    totalSystemCost: 0,
+    monthlyBill: 1,
+  },
+  '9000-10': {
+    totalSystemCost: 0,
+    monthlyBill: 1,
+  },
+  '9000-15': {
+    totalSystemCost: 0,
+    monthlyBill: 1,
   },
 };

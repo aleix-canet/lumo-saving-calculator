@@ -1,12 +1,33 @@
-import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, IconButton } from '@mui/material';
+import { Close } from '@mui/icons-material';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  IconButton,
+} from '@mui/material';
+import { CustomSlider } from '../../../components/CustomSlider';
 
 interface FinanceConfigDialogProps {
   open: boolean;
   onClose: () => void;
+  onDepositSizeChange: (value: number) => void;
+  onYearsFinancedChange: (value: number) => void;
+  totalSystemCost: number;
+  monthlyBill: number;
+  depositSize: number;
+  yearsFinanced: number;
 }
 
-const FinanceConfigDialog = ({ open, onClose }: FinanceConfigDialogProps) => {
+const FinanceConfigDialog = ({
+  open,
+  onClose,
+  onDepositSizeChange,
+  onYearsFinancedChange,
+  totalSystemCost,
+  monthlyBill,
+  depositSize,
+  yearsFinanced,
+}: FinanceConfigDialogProps) => {
   return (
     <Dialog
       open={open}
@@ -15,27 +36,144 @@ const FinanceConfigDialog = ({ open, onClose }: FinanceConfigDialogProps) => {
       maxWidth="md"
       slotProps={{
         paper: {
-          className:
-            'rounded-[24px] p-8 md:p-12 shadow-xl bg-white overflow-visible',
+          className: 'p-8 rounded-[52px]! shadow-xl relative overflow-visible',
         },
       }}
     >
       <IconButton
+        className="absolute! top-4 right-4 text-gray-400! bg-gray-500! hover:text-gray-600! hover:bg-gray-700! rounded-full mr-4! mt-5! w-8 h-8"
         onClick={onClose}
-        className="absolute top-4 right-4 bg-gray-500 text-white hover:bg-gray-600"
       >
-        <CloseIcon />
+        <Close className="text-white" />
       </IconButton>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="flex-1 space-y-6">
-          <h2 className="text-xl font-medium">Financing your Lumo system</h2>
-        </div>
+      <DialogContent>
+        <div className="flex flex-col md:flex-row gap-12">
+          <div className="flex-1">
+            <h2 className="text-zinc-900 text-3xl font-light mb-6">
+              Financing your Lumo system
+            </h2>
 
-        <div className="flex-1 space-y-6">
-          <h2 className="text-xl font-medium">Monthly bill with Lumo</h2>
+            <div className="text-gray-700 text-lg font-normal space-y-3">
+              <div className="flex justify-between">
+                <span>Total system cost</span>
+                <span className="text-zinc-900">£{totalSystemCost}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Deposit size</span>
+                <span className="text-zinc-900">£0</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Amount to be financed</span>
+                <span className="text-zinc-900">£9,000</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Number of years financed</span>
+                <span className="text-zinc-900">10 years</span>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <div className="relative mb-6">
+                <CustomSlider
+                  value={depositSize}
+                  onChange={(_, value) => onDepositSizeChange(value as number)}
+                  min={0}
+                  max={9000}
+                  step={1000}
+                  aria-label="Deposit Size"
+                  valueLabelFormat={v => `Deposit size: £${v}`}
+                  valueLabelDisplay="on"
+                  className="my-5"
+                />
+              </div>
+
+              <div className="relative">
+                <CustomSlider
+                  value={yearsFinanced}
+                  onChange={(_, value) =>
+                    onYearsFinancedChange(value as number)
+                  }
+                  marks={[
+                    {
+                      value: 0,
+                    },
+                    {
+                      value: 2,
+                    },
+                    {
+                      value: 3,
+                    },
+                    {
+                      value: 5,
+                    },
+                    {
+                      value: 10,
+                    },
+                    {
+                      value: 15,
+                    },
+                  ]}
+                  min={0}
+                  max={15}
+                  step={null}
+                  aria-label="Years Financed"
+                  valueLabelDisplay="on"
+                  valueLabelFormat={v => `Years financed: ${v}`}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <h2 className="text-zinc-900 text-3xl font-light mb-6">
+              Monthly bill with Lumo
+            </h2>
+
+            <div className="space-y-3 text-gray-700 text-lg font-normal">
+              <div className="flex justify-between">
+                <span>Finance cost</span>
+                <span>- £105</span>
+              </div>
+
+              <div className="flex justify-between bg-[#9FFFC6] px-3 py-1.5">
+                <span>Lumo optimised bill</span>
+                <span>+ £18</span>
+              </div>
+
+              <div className="flex justify-between border-t border-gray-100 pt-3">
+                <span>Total monthly bill</span>
+                <span>- £{monthlyBill}</span>
+              </div>
+
+              <h3 className="text-zinc-900 text-3xl font-light mt-6">
+                Versus a standard system
+              </h3>
+
+              <div className="flex justify-between mt-2">
+                <span>Finance cost</span>
+                <span>- £105</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Standard bill</span>
+                <span>- £5</span>
+              </div>
+              <div className="flex justify-between border-t border-gray-100 pt-3">
+                <span>Total monthly bill</span>
+                <span>- £110</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </DialogContent>
+
+      <DialogActions>
+        <button className="px-8 py-5 bg-[#1FEA71]! rounded-[52px]">
+          <span className="text-zinc-900 text-lg font-medium">
+            Get your free quote
+          </span>
+        </button>
+      </DialogActions>
     </Dialog>
   );
 };

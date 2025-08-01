@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { colors } from '../constants/colors';
 
-const CustomSlider = styled(Slider)<SliderProps>(() => ({
+export const CustomSlider = styled(Slider)<SliderProps>(() => ({
   color: colors.lumoGreen,
   height: 4,
   '& .MuiSlider-thumb': {
@@ -38,7 +38,7 @@ const CustomSlider = styled(Slider)<SliderProps>(() => ({
 
 interface AnimatedCustomSliderProps extends SliderProps {
   targetValue: number;
-  step: number;
+  step: number | null;
   min: number;
   max: number;
   duration?: number;

@@ -1,3 +1,3 @@
-import type { mockedPermutations } from '../data/mock';
+import type { mockedSavingsPermutations } from '../data/mock';
 
-export type Permutations = typeof mockedPermutations;
+export type SavingsPermutations = typeof mockedSavingsPermutations;
