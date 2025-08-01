@@ -49,9 +49,9 @@ const SavingsCalculator = () => {
               <AnimatedCustomSlider
                 targetValue={solarPanels}
                 onSliderChange={setSolarPanels}
-                min={0}
-                max={16}
-                step={4}
+                min={4}
+                max={20}
+                step={1}
                 aria-label="Solar Panels"
                 valueLabelFormat={v => `${v} solar panels`}
                 className="mb-5"
@@ -59,8 +59,8 @@ const SavingsCalculator = () => {
               <AnimatedCustomSlider
                 targetValue={batterySize}
                 onSliderChange={setBatterySize}
-                min={0}
-                max={20}
+                min={5}
+                max={40}
                 step={5}
                 aria-label="Battery Size"
                 valueLabelFormat={v => `${v}kWh battery`}
