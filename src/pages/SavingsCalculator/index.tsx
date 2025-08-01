@@ -5,6 +5,7 @@ import { CustomTab, CustomTabs } from '../../components/CustomTabs';
 import { useSavingsCalculations } from '../../hooks/useSavingsCalculator';
 import AnnualSavingsChart from './components/AnnualSavingsChart';
 import BedroomSelector from './components/BedroomsSelector';
+import Footer from './components/Footer';
 import LifetimeSavingsChart from './components/LifetimeSavingsChart';
 
 const SavingsCalculator = () => {
@@ -109,28 +110,7 @@ const SavingsCalculator = () => {
           </div>
         </div>
       </main>
-
-      <footer className="border-t border-gray-200 py-4 px-4">
-        <div className="w-full flex items-center gap-6 justify-center">
-          <div>
-            <span className="text-gray-700 text-lg font-normal underline">
-              Total system cost:
-            </span>
-            <span className="text-zinc-900 text-lg font-normal"> £9,000</span>
-          </div>
-          <div>
-            <span className="text-gray-700 text-lg font-normal underline">
-              Monthly bill cost:
-            </span>
-            <span className="text-zinc-900 text-lg font-normal"> £87</span>
-          </div>
-          <button className="px-8 py-5 bg-[#1FEA71]! rounded-[52px]">
-            <span className="text-zinc-900 text-lg font-medium">
-              Get your free quote
-            </span>
-          </button>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
