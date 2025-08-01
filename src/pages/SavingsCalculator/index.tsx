@@ -2,6 +2,7 @@ import Chip from '@mui/material/Chip';
 import { useState } from 'react';
 import AnimatedCustomSlider from '../../components/CustomSlider';
 import { CustomTab, CustomTabs } from '../../components/CustomTabs';
+import { useSavingsCalculations } from '../../hooks/useSavingsCalculator';
 import AnnualSavingsChart from './AnnualSavingsChart';
 import LifetimeSavingsChart from './LifetimeSavingsChart';
 
@@ -9,6 +10,13 @@ const SavingsCalculator = () => {
   const [solarPanels, setSolarPanels] = useState(12);
   const [batterySize, setBatterySize] = useState(10);
   const [chartTabIndex, setChartTabIndex] = useState(0);
+
+  const { solarOnly, solarAndBattery, lumoSolarAndBattery } =
+    useSavingsCalculations({
+      solarPanels,
+      batterySize,
+      numberOfBedrooms: 2,
+    });
 
   // Consider changing to max-w-sm....
   return (
@@ -27,11 +35,11 @@ const SavingsCalculator = () => {
               />
               <h1 className="text-zinc-900 text-6xl font-light">
                 <span>Your home could </span>
-                <span>save £1,472 a year</span>
+                <span>save £{lumoSolarAndBattery} a year</span>
               </h1>
               <h2 className="text-gray-500 text-3xl font-light">
-                With 12 solar panels and a 15kWh battery in a 2 bed home
-                optimised by Lumo
+                With {solarPanels} solar panels and a {batterySize}kWh battery
+                in a 2 bed home optimised by Lumo
               </h2>
             </div>
             <div
@@ -66,10 +74,16 @@ const SavingsCalculator = () => {
             <div className="w-full max-w-sm h-[320px] flex flex-col justify-end">
               <div className="flex-1 flex items-end">
                 {chartTabIndex === 0 ? (
-                  <AnnualSavingsChart />
+                  <AnnualSavingsChart
+                    solarOnly={solarOnly}
+                    solarAndBattery={solarAndBattery}
+                    lumoSolarAndBattery={lumoSolarAndBattery}
+                  />
                 ) : (
                   <div className="text-center text-gray-400 text-sm w-full">
-                    <LifetimeSavingsChart />
+                    <LifetimeSavingsChart
+                      lumoSolarAndBattery={lumoSolarAndBattery}
+                    />
                   </div>
                 )}
               </div>

@@ -8,26 +8,31 @@ import {
   YAxis,
 } from 'recharts';
 import { colors } from '../../constants/colors';
-const LifetimeSavingsChart: React.FC = () => {
+
+const LifetimeSavingsChart = ({
+  lumoSolarAndBattery,
+}: {
+  lumoSolarAndBattery: number;
+}) => {
   const data = [
     {
       name: 'Year 5',
-      savings: 1500,
+      savings: lumoSolarAndBattery * 5,
       fill: colors.grey[100],
     },
     {
       name: 'Year 10',
-      savings: 2100,
+      savings: lumoSolarAndBattery * 10,
       fill: colors.grey[300],
     },
     {
       name: 'Year 15',
-      savings: 6500,
+      savings: lumoSolarAndBattery * 15,
       fill: colors.grey[500],
     },
     {
       name: 'Year 20',
-      savings: 20000,
+      savings: lumoSolarAndBattery * 20,
       fill: colors.grey[600],
     },
   ];

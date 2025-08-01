@@ -8,22 +8,27 @@ import {
   YAxis,
 } from 'recharts';
 import { colors } from '../../constants/colors';
+import type { SavingsCalculations } from '../../types/SavingsCalculations';
 
-const AnnualSavingsChart: React.FC = () => {
+const AnnualSavingsChart = ({
+  solarOnly,
+  solarAndBattery,
+  lumoSolarAndBattery,
+}: SavingsCalculations) => {
   const data = [
     {
       name: 'Solar only',
-      savings: 578,
+      savings: solarOnly,
       fill: colors.grey[100],
     },
     {
       name: 'Solar & Battery',
-      savings: 884,
+      savings: solarAndBattery,
       fill: colors.grey[300],
     },
     {
       name: 'Solar, Battery & Lumo',
-      savings: 1472,
+      savings: lumoSolarAndBattery,
       fill: colors.lumoGreen,
     },
   ];
@@ -33,7 +38,7 @@ const AnnualSavingsChart: React.FC = () => {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          margin={{ top: 16, right: 16, left: 16, bottom: 24 }}
+          margin={{ top: 40, right: 16, left: 16, bottom: 24 }}
         >
           <XAxis
             dataKey="name"
