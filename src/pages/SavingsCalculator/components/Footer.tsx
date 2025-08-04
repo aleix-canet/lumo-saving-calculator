@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 import { useFinanceCalculations } from '../../../hooks/useFinanceCalculations';
 import FinanceConfigDialog from './FinanceConfigDialog';
-import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
 
 const Footer = () => {
   const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
@@ -15,16 +15,16 @@ const Footer = () => {
   });
 
   return (
-    <footer className="border-t border-gray-200 py-4 px-4">
-      <div className="w-full flex items-center gap-6 justify-center">
+    <footer className="border-t border-gray-200 py-6 px-4 md:px-8">
+      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-center">
         <button
           onClick={() => setIsOpenFinanceDialog(true)}
           className="bg-white!"
         >
-          <span className="text-gray-700 text-lg font-normal underline">
+          <span className="text-gray-700 text-base md:text-lg font-normal underline">
             Total system cost:
           </span>
-          <span className="text-zinc-900 text-lg font-normal">
+          <span className="text-zinc-900 text-base md:text-lg font-normal">
             {' '}
             £{totalSystemCost}
           </span>
@@ -33,10 +33,10 @@ const Footer = () => {
           onClick={() => setIsOpenFinanceDialog(true)}
           className="bg-white!"
         >
-          <span className="text-gray-700 text-lg font-normal underline">
+          <span className="text-gray-700 text-base md:text-lg font-normal underline">
             Monthly bill cost:
           </span>
-          <span className="text-zinc-900 text-lg font-normal">
+          <span className="text-zinc-900 text-base md:text-lg font-normal">
             {' '}
             £{monthlyBill}
           </span>

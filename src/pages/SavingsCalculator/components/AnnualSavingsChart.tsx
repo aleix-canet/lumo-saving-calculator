@@ -34,11 +34,11 @@ const AnnualSavingsChart = ({
   ];
 
   return (
-    <div className="w-full max-w-sm h-[360px] mx-auto">
+    <div className="w-full max-w-sm h-[360px] pt-6 md:pt-0 mx-auto">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          margin={{ top: 40, right: 16, left: 16, bottom: 24 }}
+          margin={{ top: 64, right: 16, left: 16, bottom: 24 }}
         >
           <XAxis
             dataKey="name"
