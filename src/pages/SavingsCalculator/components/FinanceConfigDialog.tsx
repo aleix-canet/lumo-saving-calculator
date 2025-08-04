@@ -6,6 +6,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { CustomSlider } from '../../../components/CustomSlider';
+import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 
 interface FinanceConfigDialogProps {
@@ -166,11 +167,7 @@ const FinanceConfigDialog = ({
       </DialogContent>
 
       <DialogActions>
-        <button className="px-8 py-5 bg-[#1FEA71]! rounded-[52px]">
-          <span className="text-zinc-900 text-lg font-medium">
-            Get your free quote
-          </span>
-        </button>
+        <GetFreeQuoteButton />
       </DialogActions>
     </Dialog>
   );

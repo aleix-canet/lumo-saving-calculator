@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 import { useFinanceCalculations } from '../../../hooks/useFinanceCalculations';
 import FinanceConfigDialog from './FinanceConfigDialog';
+import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
 
 const Footer = () => {
   const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
@@ -40,11 +41,7 @@ const Footer = () => {
             £{monthlyBill}
           </span>
         </button>
-        <button className="px-8 py-5 bg-[#1FEA71]! rounded-[52px]">
-          <span className="text-zinc-900 text-lg font-medium">
-            Get your free quote
-          </span>
-        </button>
+        <GetFreeQuoteButton />
       </div>
       <FinanceConfigDialog
         open={isOpenFinanceDialog}
