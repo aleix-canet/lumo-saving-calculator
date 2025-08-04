@@ -5,7 +5,7 @@ import FinanceConfigDialog from './FinanceConfigDialog';
 
 const Footer = () => {
   const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
-  const { config, updateConfig } = useSystemConfig();
+  const { config } = useSystemConfig();
   const { depositSize, yearsFinanced } = config;
 
   const { totalSystemCost, monthlyBill } = useFinanceCalculations({

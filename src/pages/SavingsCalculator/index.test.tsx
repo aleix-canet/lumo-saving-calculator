@@ -5,5 +5,5 @@ test('renders Home Page', () => {
   render(
     <SavingsCalculator />,
   );
-  expect(screen.getByText('Click on the Vite and React logos to learn more')).toBeInTheDocument();
+  expect(screen.getByText('Lumo energy savings calculator')).toBeInTheDocument();
 });

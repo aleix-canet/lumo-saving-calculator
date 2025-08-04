@@ -1,5 +1,7 @@
-import type { SavingsCalculations } from '../types/Calculations';
-import type { FinancePermutations } from '../types/Permutations';
+import type {
+  FinanceCalculations,
+  SavingsCalculations,
+} from '../types/Calculations';
 
 // index key: solarPanels-batterySize-bedrooms
 export const mockedSavingsPermutations: Record<string, SavingsCalculations> = {
@@ -4765,7 +4767,7 @@ export const mockedSavingsPermutations: Record<string, SavingsCalculations> = {
   },
 };
 
-export const mockedFinancePermutations: Record<string, FinancePermutations> = {
+export const mockedFinancePermutations: Record<string, FinanceCalculations> = {
   '0-0': {
     totalSystemCost: 9000,
     monthlyBill: 0,

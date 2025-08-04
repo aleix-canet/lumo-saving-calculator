@@ -52,7 +52,7 @@ const SavingsCalculator = () => {
             >
               <AnimatedCustomSlider
                 targetValue={solarPanels}
-                onSliderChange={(value) => updateConfig('solarPanels', value)}
+                onSliderChange={value => updateConfig('solarPanels', value)}
                 min={4}
                 max={20}
                 step={1}
@@ -62,7 +62,7 @@ const SavingsCalculator = () => {
               />
               <AnimatedCustomSlider
                 targetValue={batterySize}
-                onSliderChange={(value) => updateConfig('batterySize', value)}
+                onSliderChange={value => updateConfig('batterySize', value)}
                 min={5}
                 max={40}
                 step={5}

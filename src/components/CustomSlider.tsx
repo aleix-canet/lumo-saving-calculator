@@ -38,7 +38,7 @@ export const CustomSlider = styled(Slider)<SliderProps>(() => ({
 
 interface AnimatedCustomSliderProps extends SliderProps {
   targetValue: number;
-  step: number | null;
+  step: number;
   min: number;
   max: number;
   duration?: number;
