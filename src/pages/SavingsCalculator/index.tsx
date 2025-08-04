@@ -24,7 +24,7 @@ const SavingsCalculator = () => {
     });
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <div className="min-h-screen bg-white grid grid-rows-[auto_1fr] px-6 max-md:py-20">
@@ -55,7 +55,7 @@ const SavingsCalculator = () => {
               </div>
               <div
                 id="sliders-container"
-                className="flex flex-col gap-11 md:gap-6 w-full md:max-w-[50%]"
+                className="flex flex-col gap-11 md:gap-6 w-full lg:max-w-[50%]"
               >
                 <AnimatedCustomSlider
                   targetValue={solarPanels}

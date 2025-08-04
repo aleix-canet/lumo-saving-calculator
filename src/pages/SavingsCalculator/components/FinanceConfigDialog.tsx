@@ -28,7 +28,8 @@ const FinanceConfigDialog = ({
   const { depositSize, yearsFinanced } = config;
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
     <Dialog
@@ -40,7 +41,7 @@ const FinanceConfigDialog = ({
       slotProps={{
         paper: {
           className:
-            'w-full max-w-full md:max-w-[720px] px-4 py-6 md:p-8 rounded-none md:rounded-[52px] shadow-xl relative overflow-visible',
+            'w-full max-w-full md:max-w-[720px] px-4 py-6 md:p-8 rounded-none md:rounded-[52px]! shadow-xl relative overflow-visible',
         },
       }}
     >
@@ -52,120 +53,143 @@ const FinanceConfigDialog = ({
       </IconButton>
 
       <DialogContent>
-        <div className="flex flex-col gap-10 md:flex-row md:gap-12">
-          <div className="flex-1">
-            <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6">
-              Financing your Lumo system
-            </h2>
+        <div className="px-8 md:px-[96px]">
+          <div className="flex flex-col gap-10 md:flex-row md:gap-12">
+            <div className="flex-1">
+              <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6">
+                Financing your Lumo system
+              </h2>
 
-            <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
-              <div className="flex justify-between">
-                <span>Total system cost</span>
-                <span className="text-zinc-900">£{totalSystemCost}</span>
+              <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
+                <div className="flex justify-between">
+                  <span>Total system cost</span>
+                  <span className="text-zinc-900">£{totalSystemCost}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Deposit size</span>
+                  <span className="text-zinc-900">£0</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Amount to be financed</span>
+                  <span className="text-zinc-900">£9,000</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Number of years financed</span>
+                  <span className="text-zinc-900">10 years</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span>Deposit size</span>
-                <span className="text-zinc-900">£0</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Amount to be financed</span>
-                <span className="text-zinc-900">£9,000</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Number of years financed</span>
-                <span className="text-zinc-900">10 years</span>
+
+              <div className="mt-10 space-y-6">
+                <div className="relative mb-6">
+                  <CustomSlider
+                    value={depositSize}
+                    onChange={(_, value) =>
+                      updateConfig('depositSize', value as number)
+                    }
+                    min={0}
+                    max={9000}
+                    step={1000}
+                    aria-label="Deposit Size"
+                    valueLabelFormat={v =>
+                      isTablet && (v === 0 || v === 9000) ? (
+                        <>
+                          Deposit
+                          <br />
+                          size: £${v}
+                        </>
+                      ) : (
+                        `Deposit size: £${v}`
+                      )
+                    }
+                    valueLabelDisplay="on"
+                    className="my-5"
+                  />
+                </div>
+
+                <div className="relative">
+                  <CustomSlider
+                    value={yearsFinanced}
+                    onChange={(_, value) =>
+                      updateConfig('yearsFinanced', value as number)
+                    }
+                    marks={[
+                      {
+                        value: 0,
+                      },
+                      {
+                        value: 2,
+                      },
+                      {
+                        value: 3,
+                      },
+                      {
+                        value: 5,
+                      },
+                      {
+                        value: 10,
+                      },
+                      {
+                        value: 15,
+                      },
+                    ]}
+                    min={0}
+                    max={15}
+                    step={null}
+                    aria-label="Years Financed"
+                    valueLabelDisplay="on"
+                    valueLabelFormat={v =>
+                      isTablet && (v === 0 || v === 15) ? (
+                        <>
+                          Years
+                          <br />
+                          financed: {v}
+                        </>
+                      ) : (
+                        `Years financed: ${v}`
+                      )
+                    }
+                    className="my-5"
+                  />
+                </div>
               </div>
             </div>
+            <div className="flex-1">
+              <h2 className="text-zinc-900 text-3xl font-light mb-6">
+                Monthly bill with Lumo
+              </h2>
 
-            <div className="mt-10 space-y-6">
-              <div className="relative mb-6">
-                <CustomSlider
-                  value={depositSize}
-                  onChange={(_, value) =>
-                    updateConfig('depositSize', value as number)
-                  }
-                  min={0}
-                  max={9000}
-                  step={1000}
-                  aria-label="Deposit Size"
-                  valueLabelFormat={v => `Deposit size: £${v}`}
-                  valueLabelDisplay="on"
-                  className="my-5"
-                />
-              </div>
+              <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
+                <div className="flex justify-between">
+                  <span>Finance cost</span>
+                  <span>- £105</span>
+                </div>
 
-              <div className="relative">
-                <CustomSlider
-                  value={yearsFinanced}
-                  onChange={(_, value) =>
-                    updateConfig('yearsFinanced', value as number)
-                  }
-                  marks={[
-                    {
-                      value: 0,
-                    },
-                    {
-                      value: 2,
-                    },
-                    {
-                      value: 3,
-                    },
-                    {
-                      value: 5,
-                    },
-                    {
-                      value: 10,
-                    },
-                    {
-                      value: 15,
-                    },
-                  ]}
-                  min={0}
-                  max={15}
-                  step={null}
-                  aria-label="Years Financed"
-                  valueLabelDisplay="on"
-                  valueLabelFormat={v => `Years financed: ${v}`}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex-1">
-            <h2 className="text-zinc-900 text-3xl font-light mb-6">
-              Monthly bill with Lumo
-            </h2>
+                <div className="flex justify-between bg-[#9FFFC6] px-3 py-1.5">
+                  <span>Lumo optimised bill</span>
+                  <span>+ £18</span>
+                </div>
 
-            <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
-              <div className="flex justify-between">
-                <span>Finance cost</span>
-                <span>- £105</span>
-              </div>
+                <div className="flex justify-between border-t border-gray-100 pt-3">
+                  <span>Total monthly bill</span>
+                  <span>- £{monthlyBill}</span>
+                </div>
 
-              <div className="flex justify-between bg-[#9FFFC6] px-3 py-1.5">
-                <span>Lumo optimised bill</span>
-                <span>+ £18</span>
-              </div>
+                <h3 className="text-zinc-900 text-3xl font-light mt-6">
+                  Versus a standard system
+                </h3>
 
-              <div className="flex justify-between border-t border-gray-100 pt-3">
-                <span>Total monthly bill</span>
-                <span>- £{monthlyBill}</span>
-              </div>
-
-              <h3 className="text-zinc-900 text-3xl font-light mt-6">
-                Versus a standard system
-              </h3>
-
-              <div className="flex justify-between mt-2">
-                <span>Finance cost</span>
-                <span>- £105</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Standard bill</span>
-                <span>- £5</span>
-              </div>
-              <div className="flex justify-between border-t border-gray-100 pt-3">
-                <span>Total monthly bill</span>
-                <span>- £110</span>
+                <div className="flex justify-between mt-2">
+                  <span>Finance cost</span>
+                  <span>- £105</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Standard bill</span>
+                  <span>- £5</span>
+                </div>
+                <div className="flex justify-between border-t border-gray-100 pt-3">
+                  <span>Total monthly bill</span>
+                  <span>- £110</span>
+                </div>
               </div>
             </div>
           </div>
