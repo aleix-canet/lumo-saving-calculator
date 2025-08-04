@@ -43,7 +43,7 @@ interface AnimatedCustomSliderProps extends SliderProps {
   max: number;
   duration?: number;
   onSliderChange: (value: number) => void;
-  valueLabelFormat?: (value: number) => string;
+  valueLabelFormat?: SliderProps['valueLabelFormat'];
   'aria-label'?: string;
 }
 

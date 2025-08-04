@@ -1,3 +1,4 @@
+import { useMediaQuery, useTheme } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { useState } from 'react';
 import AnimatedCustomSlider from '../../components/CustomSlider';
@@ -22,7 +23,9 @@ const SavingsCalculator = () => {
       numberOfBedrooms,
     });
 
-  // Consider changing to max-w-sm....
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <div className="min-h-screen bg-white grid grid-rows-[auto_1fr] px-6 max-md:py-20">
       <main className="w-full flex justify-center">
@@ -30,7 +33,7 @@ const SavingsCalculator = () => {
           <div className="md:pb-20 lg:pb-10 flex flex-col md:flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-between gap-12 md:gap-20 lg:gap-16 border-b border-gray-200">
             <div
               id="left-container"
-              className="flex flex-col gap-12 w-full lg:w-1/2 lg:flex-1"
+              className="flex flex-col gap-15 md:gap-12 w-full lg:w-1/2 lg:flex-1"
             >
               <div
                 id="text-container"
@@ -52,7 +55,7 @@ const SavingsCalculator = () => {
               </div>
               <div
                 id="sliders-container"
-                className="flex flex-col gap-6 w-full md:max-w-[50%]"
+                className="flex flex-col gap-11 md:gap-6 w-full md:max-w-[50%]"
               >
                 <AnimatedCustomSlider
                   targetValue={solarPanels}
@@ -61,7 +64,17 @@ const SavingsCalculator = () => {
                   max={20}
                   step={1}
                   aria-label="Solar Panels"
-                  valueLabelFormat={v => `${v} solar panels`}
+                  valueLabelFormat={v =>
+                    isMobile && (v === 4 || v === 20) ? (
+                      <>
+                        {v} solar
+                        <br />
+                        panels
+                      </>
+                    ) : (
+                      `${v} solar panels`
+                    )
+                  }
                   className="mb-5"
                 />
                 <AnimatedCustomSlider
@@ -71,7 +84,17 @@ const SavingsCalculator = () => {
                   max={40}
                   step={5}
                   aria-label="Battery Size"
-                  valueLabelFormat={v => `${v}kWh battery`}
+                  valueLabelFormat={v =>
+                    isMobile && (v === 5 || v === 40) ? (
+                      <>
+                        {v} kWh
+                        <br />
+                        battery
+                      </>
+                    ) : (
+                      `${v} kWh battery`
+                    )
+                  }
                 />
               </div>
             </div>
