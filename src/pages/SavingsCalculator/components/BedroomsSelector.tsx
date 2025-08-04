@@ -7,17 +7,14 @@ import {
   InputBase,
 } from '@mui/material';
 import { useState } from 'react';
+import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 
-interface BedroomSelectorProps {
-  numberOfBedrooms: number;
-  setNumberOfBedrooms: (value: number) => void;
-}
-
-const BedroomSelector = ({
-  numberOfBedrooms,
-  setNumberOfBedrooms,
-}: BedroomSelectorProps) => {
+const BedroomSelector = () => {
   const [open, setOpen] = useState(false);
+  const { config, updateConfig } = useSystemConfig();
+
+  const { numberOfBedrooms } = config;
+
   const [tempValue, setTempValue] = useState(numberOfBedrooms);
 
   const handleOpen = () => {
@@ -27,7 +24,7 @@ const BedroomSelector = ({
   const handleClose = () => setOpen(false);
 
   const handleUpdate = () => {
-    setNumberOfBedrooms(tempValue);
+    updateConfig('numberOfBedrooms', tempValue);
     handleClose();
   };
 

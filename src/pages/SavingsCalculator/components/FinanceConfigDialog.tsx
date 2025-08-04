@@ -6,28 +6,24 @@ import {
   IconButton,
 } from '@mui/material';
 import { CustomSlider } from '../../../components/CustomSlider';
+import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 
 interface FinanceConfigDialogProps {
   open: boolean;
   onClose: () => void;
-  onDepositSizeChange: (value: number) => void;
-  onYearsFinancedChange: (value: number) => void;
   totalSystemCost: number;
   monthlyBill: number;
-  depositSize: number;
-  yearsFinanced: number;
 }
 
 const FinanceConfigDialog = ({
   open,
   onClose,
-  onDepositSizeChange,
-  onYearsFinancedChange,
   totalSystemCost,
   monthlyBill,
-  depositSize,
-  yearsFinanced,
 }: FinanceConfigDialogProps) => {
+  const { config, updateConfig } = useSystemConfig();
+  const { depositSize, yearsFinanced } = config;
+
   return (
     <Dialog
       open={open}
@@ -77,7 +73,9 @@ const FinanceConfigDialog = ({
               <div className="relative mb-6">
                 <CustomSlider
                   value={depositSize}
-                  onChange={(_, value) => onDepositSizeChange(value as number)}
+                  onChange={(_, value) =>
+                    updateConfig('depositSize', value as number)
+                  }
                   min={0}
                   max={9000}
                   step={1000}
@@ -92,7 +90,7 @@ const FinanceConfigDialog = ({
                 <CustomSlider
                   value={yearsFinanced}
                   onChange={(_, value) =>
-                    onYearsFinancedChange(value as number)
+                    updateConfig('yearsFinanced', value as number)
                   }
                   marks={[
                     {

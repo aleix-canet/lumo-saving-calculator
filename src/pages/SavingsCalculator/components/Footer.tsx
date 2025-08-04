@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 import { useFinanceCalculations } from '../../../hooks/useFinanceCalculations';
 import FinanceConfigDialog from './FinanceConfigDialog';
 
 const Footer = () => {
   const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
-  const [depositSize, setDepositSize] = useState(0);
-  const [yearsFinanced, setYearsFinanced] = useState(10);
+  const { config, updateConfig } = useSystemConfig();
+  const { depositSize, yearsFinanced } = config;
 
   const { totalSystemCost, monthlyBill } = useFinanceCalculations({
     depositSize,
@@ -48,12 +49,8 @@ const Footer = () => {
       <FinanceConfigDialog
         open={isOpenFinanceDialog}
         onClose={() => setIsOpenFinanceDialog(false)}
-        onDepositSizeChange={setDepositSize}
-        onYearsFinancedChange={setYearsFinanced}
         totalSystemCost={totalSystemCost}
         monthlyBill={monthlyBill}
-        depositSize={depositSize}
-        yearsFinanced={yearsFinanced}
       />
     </footer>
   );

@@ -2,6 +2,7 @@ import Chip from '@mui/material/Chip';
 import { useState } from 'react';
 import AnimatedCustomSlider from '../../components/CustomSlider';
 import { CustomTab, CustomTabs } from '../../components/CustomTabs';
+import { useSystemConfig } from '../../contexts/CalculatorConfigContext';
 import { useSavingsCalculations } from '../../hooks/useSavingsCalculator';
 import AnnualSavingsChart from './components/AnnualSavingsChart';
 import BedroomSelector from './components/BedroomsSelector';
@@ -9,11 +10,11 @@ import Footer from './components/Footer';
 import LifetimeSavingsChart from './components/LifetimeSavingsChart';
 
 const SavingsCalculator = () => {
-  const [solarPanels, setSolarPanels] = useState(12);
-  const [batterySize, setBatterySize] = useState(10);
-  const [numberOfBedrooms, setNumberOfBedrooms] = useState(2);
   const [chartTabIndex, setChartTabIndex] = useState(0);
 
+  const { config, updateConfig } = useSystemConfig();
+
+  const { solarPanels, batterySize, numberOfBedrooms } = config;
   const { solarOnly, solarAndBattery, lumoSolarAndBattery } =
     useSavingsCalculations({
       solarPanels,
@@ -42,12 +43,7 @@ const SavingsCalculator = () => {
               </h1>
               <h2 className="text-gray-500 text-3xl font-light">
                 With {solarPanels} solar panels and a {batterySize}kWh battery
-                in a{' '}
-                <BedroomSelector
-                  numberOfBedrooms={numberOfBedrooms}
-                  setNumberOfBedrooms={setNumberOfBedrooms}
-                />{' '}
-                home optimised by Lumo
+                in a <BedroomSelector /> home optimised by Lumo
               </h2>
             </div>
             <div
@@ -56,7 +52,7 @@ const SavingsCalculator = () => {
             >
               <AnimatedCustomSlider
                 targetValue={solarPanels}
-                onSliderChange={setSolarPanels}
+                onSliderChange={(value) => updateConfig('solarPanels', value)}
                 min={4}
                 max={20}
                 step={1}
@@ -66,7 +62,7 @@ const SavingsCalculator = () => {
               />
               <AnimatedCustomSlider
                 targetValue={batterySize}
-                onSliderChange={setBatterySize}
+                onSliderChange={(value) => updateConfig('batterySize', value)}
                 min={5}
                 max={40}
                 step={5}
