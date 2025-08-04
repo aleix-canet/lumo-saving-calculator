@@ -1,3 +1,4 @@
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   Bar,
   BarChart,
@@ -33,6 +34,9 @@ const AnnualSavingsChart = ({
     },
   ];
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <div className="w-full max-w-sm h-[360px] pt-6 md:pt-0 mx-auto">
       <ResponsiveContainer width="100%" height="100%">
@@ -44,7 +48,7 @@ const AnnualSavingsChart = ({
             dataKey="name"
             axisLine={false}
             tickLine={false}
-            tick={{ fontSize: 12 }}
+            tick={{ fontSize: isMobile ? 10 : 12 }}
           />
           <YAxis hide domain={[0, 1600]} />
           <Bar dataKey="savings" radius={[6, 6, 0, 0]}>

@@ -10,7 +10,7 @@ export const CustomSlider = styled(Slider)<SliderProps>(() => ({
     height: 24,
     width: 24,
     backgroundColor: 'white',
-    border: `2px solid ${colors.lumoGreen}`,
+    border: `3px solid ${colors.lumoGreen}`,
     boxShadow: '0px 0px 4px rgba(0,0,0,0.15)',
     '&:hover, &.Mui-focusVisible, &.Mui-active': {
       boxShadow: '0px 0px 6px rgba(0,0,0,0.25)',

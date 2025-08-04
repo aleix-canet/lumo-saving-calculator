@@ -15,7 +15,7 @@ const Footer = () => {
   });
 
   return (
-    <footer className="border-t border-gray-200 py-6 px-4 md:px-8">
+    <footer className="w-full flex justify-center">
       <div className="w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-center">
         <button
           onClick={() => setIsOpenFinanceDialog(true)}
@@ -41,7 +41,7 @@ const Footer = () => {
             £{monthlyBill}
           </span>
         </button>
-        <GetFreeQuoteButton />
+        <GetFreeQuoteButton/>
       </div>
       <FinanceConfigDialog
         open={isOpenFinanceDialog}

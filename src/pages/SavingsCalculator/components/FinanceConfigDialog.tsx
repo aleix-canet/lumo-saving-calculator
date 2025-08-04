@@ -173,7 +173,7 @@ const FinanceConfigDialog = ({
       </DialogContent>
 
       <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:items-end!">
-        <GetFreeQuoteButton className="w-full max-w-xs" />
+        <GetFreeQuoteButton />
         <button
           onClick={onClose}
           className="block md:hidden w-full max-w-xs text-zinc-900 font-medium border border-zinc-200 py-5 rounded-full"
