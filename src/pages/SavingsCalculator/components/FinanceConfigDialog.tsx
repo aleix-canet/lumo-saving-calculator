@@ -1,4 +1,6 @@
 import { Close } from '@mui/icons-material';
+import { useMediaQuery, useTheme } from '@mui/material';
+
 import {
   Dialog,
   DialogActions,
@@ -25,15 +27,20 @@ const FinanceConfigDialog = ({
   const { config, updateConfig } = useSystemConfig();
   const { depositSize, yearsFinanced } = config;
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Dialog
       open={open}
       onClose={onClose}
       fullWidth
       maxWidth="md"
+      fullScreen={isMobile}
       slotProps={{
         paper: {
-          className: 'p-8 rounded-[52px]! shadow-xl relative overflow-visible',
+          className:
+            'w-full max-w-full md:max-w-[720px] px-4 py-6 md:p-8 rounded-none md:rounded-[52px] shadow-xl relative overflow-visible',
         },
       }}
     >
@@ -45,13 +52,13 @@ const FinanceConfigDialog = ({
       </IconButton>
 
       <DialogContent>
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="flex flex-col gap-10 md:flex-row md:gap-12">
           <div className="flex-1">
-            <h2 className="text-zinc-900 text-3xl font-light mb-6">
+            <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6">
               Financing your Lumo system
             </h2>
 
-            <div className="text-gray-700 text-lg font-normal space-y-3">
+            <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
               <div className="flex justify-between">
                 <span>Total system cost</span>
                 <span className="text-zinc-900">£{totalSystemCost}</span>
@@ -70,7 +77,7 @@ const FinanceConfigDialog = ({
               </div>
             </div>
 
-            <div className="mt-10">
+            <div className="mt-10 space-y-6">
               <div className="relative mb-6">
                 <CustomSlider
                   value={depositSize}
@@ -123,13 +130,12 @@ const FinanceConfigDialog = ({
               </div>
             </div>
           </div>
-
           <div className="flex-1">
             <h2 className="text-zinc-900 text-3xl font-light mb-6">
               Monthly bill with Lumo
             </h2>
 
-            <div className="space-y-3 text-gray-700 text-lg font-normal">
+            <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
               <div className="flex justify-between">
                 <span>Finance cost</span>
                 <span>- £105</span>
@@ -166,8 +172,14 @@ const FinanceConfigDialog = ({
         </div>
       </DialogContent>
 
-      <DialogActions>
-        <GetFreeQuoteButton />
+      <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:items-end!">
+        <GetFreeQuoteButton className="w-full max-w-xs" />
+        <button
+          onClick={onClose}
+          className="block md:hidden w-full max-w-xs text-zinc-900 font-medium border border-zinc-200 py-5 rounded-full"
+        >
+          Close
+        </button>
       </DialogActions>
     </Dialog>
   );

@@ -1,6 +1,9 @@
 import { useSystemConfig } from '../contexts/CalculatorConfigContext';
 
-const GetFreeQuoteButton = () => {
+interface GetFreeQuoteButtonProps {
+  className?: string;
+}
+const GetFreeQuoteButton = ({ className }: GetFreeQuoteButtonProps) => {
   const { config } = useSystemConfig();
 
   const params = new URLSearchParams({
@@ -19,8 +22,7 @@ const GetFreeQuoteButton = () => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-block px-8 py-5 bg-[#1FEA71]! hover:bg-[#20F877] rounded-[52px]
-             text-zinc-900 hover:text-zinc-600 text-lg font-medium text-center"
+      className={`inline-block px-8 py-5 bg-[#1FEA71]! hover:bg-[#20F877] rounded-[52px] text-zinc-900 hover:text-zinc-600 text-lg font-medium text-center ${className}`}
     >
       Get your free quote
     </a>
