@@ -14,8 +14,8 @@ export const CustomTab = styled((props: TabProps) => (
   <Tab disableRipple disableFocusRipple disableTouchRipple {...props} />
 ))({
   color: '#666', // inactive color
-  fontWeight: 500,
-  fontSize: '0.875rem',
+  fontWeight: 400,
+  fontSize: '1.125rem',
   textTransform: 'none',
   paddingBottom: '4px',
   minHeight: 'unset',

@@ -41,7 +41,7 @@ const FinanceConfigDialog = ({
       slotProps={{
         paper: {
           className:
-            'w-full max-w-full md:max-w-[720px] px-4 py-6 md:p-8 rounded-none md:rounded-[52px]! shadow-xl relative overflow-visible',
+            'w-full max-w-full md:max-w-[720px] px-4 py-6 md:px-20 md:pt-26 md:pb-16 rounded-none md:rounded-[52px]! shadow-xl relative overflow-visible',
         },
       }}
     >
@@ -53,7 +53,7 @@ const FinanceConfigDialog = ({
       </IconButton>
 
       <DialogContent>
-        <div className="px-8 md:px-[96px]">
+        <div className="px-9 md:px-12">
           <div className="flex flex-col gap-10 md:flex-row md:gap-12">
             <div className="flex-1">
               <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6">

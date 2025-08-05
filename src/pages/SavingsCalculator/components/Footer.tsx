@@ -21,10 +21,10 @@ const Footer = () => {
           onClick={() => setIsOpenFinanceDialog(true)}
           className="bg-white!"
         >
-          <span className="text-gray-700 text-base md:text-lg font-normal underline">
+          <span className="text-gray-700 text-lg md:text-lg font-normal underline">
             Total system cost:
           </span>
-          <span className="text-zinc-900 text-base md:text-lg font-normal">
+          <span className="text-zinc-900 text-lg md:text-lg font-normal">
             {' '}
             £{totalSystemCost}
           </span>
@@ -33,15 +33,15 @@ const Footer = () => {
           onClick={() => setIsOpenFinanceDialog(true)}
           className="bg-white!"
         >
-          <span className="text-gray-700 text-base md:text-lg font-normal underline">
+          <span className="text-gray-700 text-lg md:text-lg font-normal underline">
             Monthly bill cost:
           </span>
-          <span className="text-zinc-900 text-base md:text-lg font-normal">
+          <span className="text-zinc-900 text-lg md:text-lg font-normal">
             {' '}
             £{monthlyBill}
           </span>
         </button>
-        <GetFreeQuoteButton/>
+        <GetFreeQuoteButton />
       </div>
       <FinanceConfigDialog
         open={isOpenFinanceDialog}

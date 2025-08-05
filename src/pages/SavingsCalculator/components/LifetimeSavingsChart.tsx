@@ -1,3 +1,4 @@
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   Bar,
   BarChart,
@@ -14,6 +15,9 @@ const LifetimeSavingsChart = ({
 }: {
   lumoSolarAndBattery: number;
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   const data = [
     {
       name: 'Year 5',
@@ -43,22 +47,35 @@ const LifetimeSavingsChart = ({
         <BarChart
           data={data}
           margin={{ top: 64, right: 16, left: 16, bottom: 24 }}
+          barCategoryGap="15%"
         >
           <XAxis
             dataKey="name"
             axisLine={false}
             tickLine={false}
-            tick={{ fontSize: 12 }}
+            tick={{
+              fill: '#374151',
+              fontSize: '1rem',
+              fontWeight: 500,
+              wordBreak: 'break-word',
+              width: 60,
+              lineHeight: 1.2,
+            }}
           />
           <YAxis hide domain={[0, 22000]} />
           <Bar dataKey="savings" radius={[6, 6, 0, 0]}>
             <LabelList
               dataKey="savings"
               position="top"
+              dy={-12}
               formatter={(label: React.ReactNode) =>
                 typeof label === 'number' ? `£${label.toLocaleString()}` : label
               }
-              style={{ fill: '#111', fontWeight: 600 }}
+              style={{
+                fill: '#18181b',
+                fontSize: isMobile ? '1.375rem' : '1.875rem',
+                fontWeight: 300,
+              }}
             />
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />

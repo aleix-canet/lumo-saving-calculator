@@ -48,17 +48,30 @@ const AnnualSavingsChart = ({
             dataKey="name"
             axisLine={false}
             tickLine={false}
-            tick={{ fontSize: isMobile ? 10 : 12 }}
+            interval={0}
+            tick={{
+              fill: '#374151',
+              fontSize: '1rem',
+              fontWeight: 500,
+              wordBreak: 'break-word',
+              width: 60,
+              lineHeight: 1.2,
+            }}
           />
           <YAxis hide domain={[0, 1600]} />
           <Bar dataKey="savings" radius={[6, 6, 0, 0]}>
             <LabelList
               dataKey="savings"
               position="top"
+              dy={-12}
               formatter={(label: React.ReactNode) =>
                 typeof label === 'number' ? `£${label}` : label
               }
-              style={{ fill: '#111', fontWeight: 600 }}
+              style={{
+                fill: '#18181b',
+                fontSize: isMobile ? '1.375rem' : '1.875rem',
+                fontWeight: 300,
+              }}
             />
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />

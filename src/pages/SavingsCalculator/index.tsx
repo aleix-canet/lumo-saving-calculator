@@ -41,7 +41,7 @@ const SavingsCalculator = () => {
               >
                 <Chip
                   size="small"
-                  className="rounded-2xl text-gray-700 text-sm font-semibold"
+                  className="rounded-2xl text-gray-700 text-sm! font-semibold"
                   label="Lumo energy savings calculator"
                 />
                 <h1 className="text-zinc-900 text-3xl md:text-6xl font-light">
