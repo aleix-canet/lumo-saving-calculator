@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getSavingsPermutationsData } from '../data/permutations';
 import type { SavingsCalculations } from '../types/Calculations';
-import type { SavingsPermutations } from '../types/Permutations';
 
 interface useSavingsCalculationsProps {
   solarPanels: number;
@@ -14,7 +13,7 @@ export const useSavingsCalculations = ({
   batterySize,
   numberOfBedrooms,
 }: useSavingsCalculationsProps): SavingsCalculations => {
-  const [data, setData] = useState<SavingsPermutations>();
+  const [data, setData] = useState<SavingsCalculations[]>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,12 +29,27 @@ export const useSavingsCalculations = ({
   }, []);
 
   const savingsData = useMemo(() => {
-    // TODO: use real logic when fetching final JSON
-    const indexedKey = `${solarPanels}-${batterySize}-${numberOfBedrooms}`;
-    return data?.[indexedKey];
+    return data?.find(
+      item =>
+        item.solarPanels === solarPanels &&
+        item.batterySize === batterySize &&
+        item.bedrooms === numberOfBedrooms,
+    );
   }, [batterySize, data, numberOfBedrooms, solarPanels]);
 
   return (
-    savingsData ?? { solarOnly: 0, solarAndBattery: 0, lumoSolarAndBattery: 0 }
+    savingsData ?? {
+      solarPanels: solarPanels,
+      batterySize: batterySize,
+      bedrooms: numberOfBedrooms,
+      baselineUtilityBill: 0,
+      solarOnlyUtilityBill: 0,
+      solarBatteryUtilityBill: 0,
+      solarBatteryLumoUtilityBill: 0,
+      estimatedSystemPrice: 0,
+      depositPercentage: '0%',
+      yearsFinanced: 0,
+      interestRate: '0%',
+    }
   );
 };

@@ -9,13 +9,18 @@ import {
   YAxis,
 } from 'recharts';
 import { colors } from '../../../constants/colors';
-import type { SavingsCalculations } from '../../../types/Calculations';
+
+interface AnnualSavingsChartProps {
+  solarOnly: number;
+  solarAndBattery: number;
+  lumoSolarAndBattery: number;
+}
 
 const AnnualSavingsChart = ({
   solarOnly,
   solarAndBattery,
   lumoSolarAndBattery,
-}: SavingsCalculations) => {
+}: AnnualSavingsChartProps) => {
   const data = [
     {
       name: 'Solar only',

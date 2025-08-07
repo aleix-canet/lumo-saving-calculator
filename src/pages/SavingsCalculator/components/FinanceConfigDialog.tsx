@@ -10,19 +10,20 @@ import {
 import { CustomSlider } from '../../../components/CustomSlider';
 import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
+import type { FinancialcalculationsOutput } from '../utils';
 
 interface FinanceConfigDialogProps {
   open: boolean;
   onClose: () => void;
+  financialCalculations: FinancialcalculationsOutput;
   totalSystemCost: number;
-  monthlyBill: number;
 }
 
 const FinanceConfigDialog = ({
   open,
   onClose,
+  financialCalculations,
   totalSystemCost,
-  monthlyBill,
 }: FinanceConfigDialogProps) => {
   const { config, updateConfig } = useSystemConfig();
   const { depositSize, yearsFinanced } = config;
@@ -52,8 +53,8 @@ const FinanceConfigDialog = ({
         <Close className="text-white" />
       </IconButton>
 
-      <DialogContent>
-        <div className="px-9 md:px-12">
+      <DialogContent className="md:px-4!">
+        <div className="px-11 md:px-12">
           <div className="flex flex-col gap-10 md:flex-row md:gap-12">
             <div className="flex-1">
               <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6">
@@ -67,15 +68,17 @@ const FinanceConfigDialog = ({
                 </div>
                 <div className="flex justify-between">
                   <span>Deposit size</span>
-                  <span className="text-zinc-900">£0</span>
+                  <span className="text-zinc-900">£{depositSize}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Amount to be financed</span>
-                  <span className="text-zinc-900">£9,000</span>
+                  <span className="text-zinc-900">
+                    £{financialCalculations.financedAmount}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Number of years financed</span>
-                  <span className="text-zinc-900">10 years</span>
+                  <span className="text-zinc-900">{yearsFinanced} years</span>
                 </div>
               </div>
 
@@ -112,9 +115,6 @@ const FinanceConfigDialog = ({
                       updateConfig('yearsFinanced', value as number)
                     }
                     marks={[
-                      {
-                        value: 0,
-                      },
                       {
                         value: 2,
                       },
@@ -160,17 +160,21 @@ const FinanceConfigDialog = ({
               <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
                 <div className="flex justify-between">
                   <span>Finance cost</span>
-                  <span>- £105</span>
+                  <span>- £{financialCalculations.monthlyFinanceBill}</span>
                 </div>
 
                 <div className="flex justify-between bg-[#9FFFC6] px-3 py-1.5">
                   <span>Lumo optimised bill</span>
-                  <span>+ £18</span>
+                  <span>
+                    £{financialCalculations.monthlySolarBatteryLumoUtilityBill}
+                  </span>{' '}
                 </div>
 
                 <div className="flex justify-between border-t border-gray-100 pt-3">
                   <span>Total monthly bill</span>
-                  <span>- £{monthlyBill}</span>
+                  <span>
+                    £{financialCalculations.monthlyOptimisedCombinedBill}
+                  </span>
                 </div>
 
                 <h3 className="text-zinc-900 text-3xl font-light mt-6">
@@ -179,15 +183,19 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between mt-2">
                   <span>Finance cost</span>
-                  <span>- £105</span>
+                  <span>£{financialCalculations.monthlyFinanceBill}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Standard bill</span>
-                  <span>- £5</span>
+                  <span>
+                    £{financialCalculations.monthlySolarBatteryUtilityBill}
+                  </span>
                 </div>
                 <div className="flex justify-between border-t border-gray-100 pt-3">
                   <span>Total monthly bill</span>
-                  <span>- £110</span>
+                  <span>
+                    £{financialCalculations.monthlyUnoptimisedCombinedBill}
+                  </span>
                 </div>
               </div>
             </div>

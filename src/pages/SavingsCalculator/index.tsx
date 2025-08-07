@@ -16,12 +16,17 @@ const SavingsCalculator = () => {
   const { config, updateConfig } = useSystemConfig();
 
   const { solarPanels, batterySize, numberOfBedrooms } = config;
-  const { solarOnly, solarAndBattery, lumoSolarAndBattery } =
-    useSavingsCalculations({
-      solarPanels,
-      batterySize,
-      numberOfBedrooms,
-    });
+  const savingsData = useSavingsCalculations({
+    solarPanels,
+    batterySize,
+    numberOfBedrooms,
+  });
+
+  const {
+    solarOnlyUtilityBill,
+    solarBatteryUtilityBill,
+    solarBatteryLumoUtilityBill,
+  } = savingsData;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -46,7 +51,7 @@ const SavingsCalculator = () => {
                 />
                 <h1 className="text-zinc-900 text-3xl md:text-6xl font-light">
                   <span>Your home could </span>
-                  <span>save £{lumoSolarAndBattery} a year</span>
+                  <span>save £{solarBatteryLumoUtilityBill} a year</span>
                 </h1>
                 <h2 className="text-gray-500 text-xl md:text-3xl font-light">
                   With {solarPanels} solar panels and a {batterySize}kWh battery
@@ -106,14 +111,14 @@ const SavingsCalculator = () => {
                 <div className="flex-1 flex items-end">
                   {chartTabIndex === 0 ? (
                     <AnnualSavingsChart
-                      solarOnly={solarOnly}
-                      solarAndBattery={solarAndBattery}
-                      lumoSolarAndBattery={lumoSolarAndBattery}
+                      solarOnly={solarOnlyUtilityBill}
+                      solarAndBattery={solarBatteryUtilityBill}
+                      lumoSolarAndBattery={solarBatteryLumoUtilityBill}
                     />
                   ) : (
                     <div className="text-center text-gray-400 text-sm w-full">
                       <LifetimeSavingsChart
-                        lumoSolarAndBattery={lumoSolarAndBattery}
+                        lumoSolarAndBattery={solarBatteryLumoUtilityBill}
                       />
                     </div>
                   )}
@@ -136,7 +141,7 @@ const SavingsCalculator = () => {
       </main>
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[1440px] px-6 md:px-[128px] pt-8 pb-8">
-          <Footer />
+          <Footer savingsData={savingsData} />
         </div>
       </div>
     </div>

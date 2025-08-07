@@ -1,19 +1,25 @@
 import { useState } from 'react';
 import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
-import { useFinanceCalculations } from '../../../hooks/useFinanceCalculations';
+import type { SavingsCalculations } from '../../../types/Calculations';
+import { calculateFinanceSummary } from '../utils';
 import FinanceConfigDialog from './FinanceConfigDialog';
 
-const Footer = () => {
+const Footer = ({ savingsData }: { savingsData: SavingsCalculations }) => {
   const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
   const { config } = useSystemConfig();
   const { depositSize, yearsFinanced } = config;
 
-  const { totalSystemCost, monthlyBill } = useFinanceCalculations({
-    depositSize,
-    yearsFinanced,
-  });
-
+  const financialCalculations = calculateFinanceSummary(
+    {
+      solarPanels: savingsData.solarPanels,
+      batterySize: savingsData.batterySize,
+      bedrooms: savingsData.bedrooms,
+      depositPercentage: depositSize,
+      yearsFinanced: yearsFinanced,
+    },
+    savingsData,
+  );
   return (
     <footer className="w-full flex justify-center">
       <div className="w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-center">
@@ -26,7 +32,7 @@ const Footer = () => {
           </span>
           <span className="text-zinc-900 text-lg md:text-lg font-normal">
             {' '}
-            £{totalSystemCost}
+            £{savingsData.estimatedSystemPrice}
           </span>
         </button>
         <button
@@ -38,7 +44,7 @@ const Footer = () => {
           </span>
           <span className="text-zinc-900 text-lg md:text-lg font-normal">
             {' '}
-            £{monthlyBill}
+            £{financialCalculations?.monthlyOptimisedCombinedBill}
           </span>
         </button>
         <GetFreeQuoteButton />
@@ -46,8 +52,8 @@ const Footer = () => {
       <FinanceConfigDialog
         open={isOpenFinanceDialog}
         onClose={() => setIsOpenFinanceDialog(false)}
-        totalSystemCost={totalSystemCost}
-        monthlyBill={monthlyBill}
+        financialCalculations={financialCalculations}
+        totalSystemCost={savingsData.estimatedSystemPrice}
       />
     </footer>
   );

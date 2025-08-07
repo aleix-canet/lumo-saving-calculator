@@ -9,6 +9,9 @@ import {
 import { useState } from 'react';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 
+const MIN_BEDROOMS = 2;
+const MAX_BEDROOMS = 4;
+
 const BedroomSelector = () => {
   const [open, setOpen] = useState(false);
   const { config, updateConfig } = useSystemConfig();
@@ -29,11 +32,11 @@ const BedroomSelector = () => {
   };
 
   const increment = () => {
-    setTempValue(prev => Math.min(prev + 1, 4));
+    setTempValue(prev => Math.min(prev + 1, MAX_BEDROOMS));
   };
 
   const decrement = () => {
-    setTempValue(prev => Math.max(prev - 1, 2));
+    setTempValue(prev => Math.max(prev - 1, MIN_BEDROOMS));
   };
 
   return (
@@ -85,7 +88,10 @@ const BedroomSelector = () => {
               value={tempValue}
               onChange={e =>
                 setTempValue(
-                  Math.max(2, Math.min(4, parseInt(e.target.value) || 1)),
+                  Math.max(
+                    MIN_BEDROOMS,
+                    Math.min(MAX_BEDROOMS, parseInt(e.target.value) || 1),
+                  ),
                 )
               }
               inputProps={{
