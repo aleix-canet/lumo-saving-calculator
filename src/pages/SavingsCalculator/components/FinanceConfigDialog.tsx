@@ -87,18 +87,17 @@ const FinanceConfigDialog = ({
                       updateConfig('depositSize', value as number)
                     }
                     min={0}
-                    max={9000}
-                    step={1000}
-                    aria-label="Deposit Size"
+                    max={100}
+                    step={10}
+                    aria-label="Deposit %"
                     valueLabelFormat={v =>
                       isTablet && (v === 0 || v === 9000) ? (
                         <>
                           Deposit
-                          <br />
-                          size: £${v}
+                          <br />${v}%
                         </>
                       ) : (
-                        `Deposit size: £${v}`
+                        `Deposit: ${v}%`
                       )
                     }
                     valueLabelDisplay="on"

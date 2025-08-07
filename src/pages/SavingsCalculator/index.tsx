@@ -60,9 +60,9 @@ const SavingsCalculator = () => {
                 <AnimatedCustomSlider
                   targetValue={solarPanels}
                   onSliderChange={value => updateConfig('solarPanels', value)}
-                  min={4}
-                  max={20}
-                  step={1}
+                  min={6}
+                  max={14}
+                  step={2}
                   aria-label="Solar Panels"
                   valueLabelFormat={v =>
                     isMobile && (v === 4 || v === 20) ? (
@@ -81,7 +81,7 @@ const SavingsCalculator = () => {
                   targetValue={batterySize}
                   onSliderChange={value => updateConfig('batterySize', value)}
                   min={5}
-                  max={40}
+                  max={15}
                   step={5}
                   aria-label="Battery Size"
                   valueLabelFormat={v =>

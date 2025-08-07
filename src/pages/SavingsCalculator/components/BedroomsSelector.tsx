@@ -29,11 +29,11 @@ const BedroomSelector = () => {
   };
 
   const increment = () => {
-    setTempValue(prev => Math.min(prev + 1, 7));
+    setTempValue(prev => Math.min(prev + 1, 4));
   };
 
   const decrement = () => {
-    setTempValue(prev => Math.max(prev - 1, 1));
+    setTempValue(prev => Math.max(prev - 1, 2));
   };
 
   return (
@@ -75,14 +75,17 @@ const BedroomSelector = () => {
               onClick={decrement}
               className="border! border-gray-500! hover:border-gray-900! border-3! text-gray-700! w-9 h-9 md:w-10 md:h-10"
             >
-              <Remove className="text-gray-500 hover:text-gray-900" strokeWidth={2} />
+              <Remove
+                className="text-gray-500 hover:text-gray-900"
+                strokeWidth={2}
+              />
             </IconButton>
 
             <InputBase
               value={tempValue}
               onChange={e =>
                 setTempValue(
-                  Math.max(1, Math.min(7, parseInt(e.target.value) || 1)),
+                  Math.max(2, Math.min(4, parseInt(e.target.value) || 1)),
                 )
               }
               inputProps={{
@@ -95,7 +98,10 @@ const BedroomSelector = () => {
               onClick={increment}
               className="border! border-gray-500! hover:border-gray-900! border-3! text-gray-700! w-9 h-9 md:w-10 md:h-10"
             >
-              <Add className="text-gray-500 hover:text-gray-900" strokeWidth={2} />
+              <Add
+                className="text-gray-500 hover:text-gray-900"
+                strokeWidth={2}
+              />
             </IconButton>
           </div>
         </DialogContent>
