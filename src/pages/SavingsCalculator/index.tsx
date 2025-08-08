@@ -9,24 +9,36 @@ import AnnualSavingsChart from './components/AnnualSavingsChart';
 import BedroomSelector from './components/BedroomsSelector';
 import Footer from './components/Footer';
 import LifetimeSavingsChart from './components/LifetimeSavingsChart';
+import { calculateFinanceSummary } from './utils';
 
 const SavingsCalculator = () => {
   const [chartTabIndex, setChartTabIndex] = useState(0);
 
   const { config, updateConfig } = useSystemConfig();
 
-  const { solarPanels, batterySize, numberOfBedrooms } = config;
+  const {
+    solarPanels,
+    batterySize,
+    numberOfBedrooms,
+    depositSize,
+    yearsFinanced,
+  } = config;
   const savingsData = useSavingsCalculations({
     solarPanels,
     batterySize,
     numberOfBedrooms,
   });
 
-  const {
-    solarOnlyUtilityBill,
-    solarBatteryUtilityBill,
-    solarBatteryLumoUtilityBill,
-  } = savingsData;
+  const financialCalculations = calculateFinanceSummary(
+    {
+      solarPanels: savingsData.solarPanels,
+      batterySize: savingsData.batterySize,
+      bedrooms: savingsData.bedrooms,
+      depositPercentage: depositSize,
+      yearsFinanced: yearsFinanced,
+    },
+    savingsData,
+  );
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -51,7 +63,9 @@ const SavingsCalculator = () => {
                 />
                 <h1 className="text-zinc-900 text-3xl md:text-6xl font-light">
                   <span>Your home could </span>
-                  <span>save £{solarBatteryLumoUtilityBill} a year</span>
+                  <span>
+                    save £{financialCalculations.solarBatteryLumoSavings} a year
+                  </span>
                 </h1>
                 <h2 className="text-gray-500 text-xl md:text-3xl font-light">
                   With {solarPanels} solar panels and a {batterySize}kWh battery
@@ -111,14 +125,20 @@ const SavingsCalculator = () => {
                 <div className="flex-1 flex items-end">
                   {chartTabIndex === 0 ? (
                     <AnnualSavingsChart
-                      solarOnly={solarOnlyUtilityBill}
-                      solarAndBattery={solarBatteryUtilityBill}
-                      lumoSolarAndBattery={solarBatteryLumoUtilityBill}
+                      solarOnly={financialCalculations.solarOnlySavings}
+                      solarAndBattery={
+                        financialCalculations.solarBatterySavings
+                      }
+                      lumoSolarAndBattery={
+                        financialCalculations.solarBatteryLumoSavings
+                      }
                     />
                   ) : (
                     <div className="text-center text-gray-400 text-sm w-full">
                       <LifetimeSavingsChart
-                        lumoSolarAndBattery={solarBatteryLumoUtilityBill}
+                        lumoSolarAndBattery={
+                          financialCalculations.solarBatteryLumoSavings
+                        }
                       />
                     </div>
                   )}

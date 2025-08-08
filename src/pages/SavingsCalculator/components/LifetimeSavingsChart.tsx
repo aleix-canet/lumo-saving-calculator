@@ -53,14 +53,16 @@ const LifetimeSavingsChart = ({
             dataKey="name"
             axisLine={false}
             tickLine={false}
-            tick={{
-              fill: '#374151',
-              fontSize: '1rem',
-              fontWeight: 500,
-              wordBreak: 'break-word',
-              width: 60,
-              lineHeight: 1.2,
-            }}
+            tick={
+              {
+                fill: '#374151',
+                fontSize: '1rem',
+                fontWeight: 500,
+                wordBreak: 'break-word',
+                width: 60,
+                lineHeight: 1.2,
+              } as unknown as React.SVGProps<SVGTextElement>
+            }
           />
           <YAxis hide domain={[0, 22000]} />
           <Bar dataKey="savings" radius={[6, 6, 0, 0]}>

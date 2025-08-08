@@ -54,14 +54,16 @@ const AnnualSavingsChart = ({
             axisLine={false}
             tickLine={false}
             interval={0}
-            tick={{
-              fill: '#374151',
-              fontSize: '1rem',
-              fontWeight: 500,
-              wordBreak: 'break-word',
-              width: 60,
-              lineHeight: 1.2,
-            }}
+            tick={
+              {
+                fill: '#374151',
+                fontSize: '1rem',
+                fontWeight: 500,
+                wordBreak: 'break-word',
+                width: 60,
+                lineHeight: 1.2,
+              } as unknown as React.SVGProps<SVGTextElement>
+            }
           />
           <YAxis hide domain={[0, 1600]} />
           <Bar dataKey="savings" radius={[6, 6, 0, 0]}>

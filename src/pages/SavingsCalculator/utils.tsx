@@ -27,6 +27,14 @@ export type FinancialcalculationsOutput = {
   monthlyOptimisedCombinedBill: number;
 };
 
+const loanInterestMap: Record<number, number> = {
+  2: 0,
+  3: 0,
+  5: 7,
+  10: 8,
+  15: 9,
+};
+
 export function calculateFinanceSummary(
   input: FinancialInputs,
   dataset: SavingsCalculations,
@@ -37,10 +45,11 @@ export function calculateFinanceSummary(
     solarBatteryUtilityBill,
     solarBatteryLumoUtilityBill,
     estimatedSystemPrice,
-    interestRate,
   } = dataset;
 
-  const interest = parseFloat(interestRate.replace('%', '')) / 100;
+  const interestRate = loanInterestMap[input.yearsFinanced] ?? 0;
+
+  const interest = interestRate / 100;
   const depositAmount = estimatedSystemPrice * (input.depositPercentage / 100);
   const financedAmount = estimatedSystemPrice - depositAmount;
   const monthlyFinanceBill = pmt(
