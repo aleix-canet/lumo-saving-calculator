@@ -1,1 +1,0 @@
-# lumo-saving-calculator
