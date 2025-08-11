@@ -1,6 +1,20 @@
 # Documentation + next steps
 ## Refer to Documentation+next-steps.pdf for detailed information
 
+# How to run locally
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+### 2️⃣ Install Dependencies + Run the Development Server
+```bash
+npm install
+npm run dev
+```
+This will start the app at: http://localhost:5173
 
 # React + TypeScript + Vite
 
