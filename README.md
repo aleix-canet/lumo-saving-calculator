@@ -1,3 +1,7 @@
+# Documentation + next steps
+## Refer to Documentation+next-steps.pdf for detailed information
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
