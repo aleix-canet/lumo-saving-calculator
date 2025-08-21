@@ -1,10 +1,12 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { useState } from 'react';
+import CountUp from 'react-countup';
 import AnimatedCustomSlider from '../../components/CustomSlider';
 import { CustomTab, CustomTabs } from '../../components/CustomTabs';
 import { useSystemConfig } from '../../contexts/CalculatorConfigContext';
 import { useSavingsCalculations } from '../../hooks/useSavingsCalculator';
+import { displayPositiveOrNegativeCurrency } from '../../utils/currency';
 import AnnualSavingsChart from './components/AnnualSavingsChart';
 import BedroomSelector from './components/BedroomsSelector';
 import Footer from './components/Footer';
@@ -47,10 +49,10 @@ const SavingsCalculator = () => {
     <div className="min-h-screen bg-white grid grid-rows-[auto_1fr] px-6 max-md:py-20">
       <main className="w-full flex justify-center">
         <div className="w-full max-w-[1440px] px-6 md:px-[128px] md:pt-16">
-          <div className="md:pb-20 lg:pb-10 flex flex-col md:flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-between gap-12 md:gap-20 lg:gap-16 border-b border-gray-200">
+          <div className="md:pb-20 lg:pb-10 flex flex-col md:flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-between gap-12 md:gap-20 lg:gap-0 border-b border-gray-200">
             <div
               id="left-container"
-              className="flex flex-col gap-15 md:gap-12 w-full lg:w-1/2 lg:flex-1"
+              className="flex flex-col gap-15 md:gap-12 w-full lg:w-1/2 lg:flex-2"
             >
               <div
                 id="text-container"
@@ -64,7 +66,22 @@ const SavingsCalculator = () => {
                 <h1 className="text-zinc-900 text-3xl md:text-6xl font-light">
                   <span>Your home could </span>
                   <span>
-                    save £{financialCalculations.solarBatteryLumoSavings} a year
+                    save{' '}
+                    <CountUp
+                      key={financialCalculations.solarBatteryLumoSavings}
+                      start={0}
+                      end={
+                        Number(financialCalculations.solarBatteryLumoSavings) ||
+                        0
+                      }
+                      duration={1}
+                      useEasing
+                      easingFn={(t, b, c, d) =>
+                        b + c * (1 - Math.pow(1 - t / d, 3))
+                      }
+                      formattingFn={displayPositiveOrNegativeCurrency}
+                    />{' '}
+                    a year
                   </span>
                 </h1>
                 <h2 className="text-gray-500 text-xl md:text-3xl font-light">

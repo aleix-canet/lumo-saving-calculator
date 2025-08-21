@@ -22,7 +22,7 @@ const GetFreeQuoteButton = ({ className }: GetFreeQuoteButtonProps) => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-block px-8 py-5 bg-[#1FEA71]! hover:bg-[#20F877]! rounded-[52px] text-zinc-900 hover:text-zinc-600 text-lg font-medium text-center ${className} w-full max-w-xs`}
+      className={`inline-block px-8 py-5 bg-[#1FEA71]! hover:bg-[#20F877]! rounded-[52px] text-zinc-900 text-lg font-medium text-center ${className} w-full max-w-xs`}
     >
       Get your free quote
     </a>

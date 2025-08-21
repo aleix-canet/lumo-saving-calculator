@@ -10,6 +10,7 @@ import {
 import { CustomSlider } from '../../../components/CustomSlider';
 import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
+import { displayPositiveOrNegativeCurrency } from '../../../utils/currency';
 import type { FinancialcalculationsOutput } from '../utils';
 
 interface FinanceConfigDialogProps {
@@ -36,13 +37,12 @@ const FinanceConfigDialog = ({
     <Dialog
       open={open}
       onClose={onClose}
-      fullWidth
-      maxWidth="md"
+      maxWidth={false}
       fullScreen={isMobile}
       slotProps={{
         paper: {
           className:
-            'w-full max-w-full md:max-w-[720px] px-4 py-6 md:px-20 md:pt-26 md:pb-16 rounded-none md:rounded-[52px]! shadow-xl relative overflow-visible',
+            'w-full md:w-[1112px] md:max-w-[1112px] px-4 py-6 md:px-20 md:pt-22 md:pb-16 rounded-none md:rounded-[52px]! shadow-xl relative overflow-visible',
         },
       }}
     >
@@ -54,7 +54,7 @@ const FinanceConfigDialog = ({
       </IconButton>
 
       <DialogContent className="md:px-4!">
-        <div className="px-11 md:px-12">
+        <div className="px-11 md:px-14">
           <div className="flex flex-col gap-10 md:flex-row md:gap-12">
             <div className="flex-1">
               <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6">
@@ -64,7 +64,9 @@ const FinanceConfigDialog = ({
               <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
                 <div className="flex justify-between">
                   <span>Total system cost</span>
-                  <span className="text-zinc-900">£{totalSystemCost}</span>
+                  <span className="text-zinc-900">
+                    {displayPositiveOrNegativeCurrency(totalSystemCost)}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Deposit size</span>
@@ -73,7 +75,9 @@ const FinanceConfigDialog = ({
                 <div className="flex justify-between">
                   <span>Amount to be financed</span>
                   <span className="text-zinc-900">
-                    £{financialCalculations.financedAmount}
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.financedAmount,
+                    )}
                   </span>
                 </div>
                 <div className="flex justify-between">
@@ -82,8 +86,8 @@ const FinanceConfigDialog = ({
                 </div>
               </div>
 
-              <div className="mt-10 space-y-6">
-                <div className="relative mb-6">
+              <div className="mt-10 max:lg:space-y-6">
+                <div className="relative max-lg:mb-6">
                   <CustomSlider
                     value={depositSize}
                     onChange={(_, value) =>
@@ -94,7 +98,7 @@ const FinanceConfigDialog = ({
                     step={10}
                     aria-label="Deposit %"
                     valueLabelFormat={v =>
-                      isTablet && (v === 0 || v === 9000) ? (
+                      isTablet && (v === 0 || v === 100) ? (
                         <>
                           Deposit
                           <br />${v}%
@@ -131,13 +135,13 @@ const FinanceConfigDialog = ({
                         value: 15,
                       },
                     ]}
-                    min={0}
+                    min={2}
                     max={15}
                     step={null}
                     aria-label="Years Financed"
                     valueLabelDisplay="on"
                     valueLabelFormat={v =>
-                      isTablet && (v === 0 || v === 15) ? (
+                      isTablet && (v === 2 || v === 15) ? (
                         <>
                           Years
                           <br />
@@ -148,6 +152,10 @@ const FinanceConfigDialog = ({
                       )
                     }
                     className="my-5"
+                    sx={{
+                      '& .MuiSlider-mark': { display: 'none' },
+                      '& .MuiSlider-markLabel': { display: 'none' },
+                    }}
                   />
                 </div>
               </div>
@@ -160,20 +168,28 @@ const FinanceConfigDialog = ({
               <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
                 <div className="flex justify-between">
                   <span>Finance cost</span>
-                  <span>- £{financialCalculations.monthlyFinanceBill}</span>
+                  <span>
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.monthlyFinanceBill,
+                    )}
+                  </span>
                 </div>
 
                 <div className="flex justify-between bg-[#9FFFC6] px-3 py-1.5">
                   <span>Lumo optimised bill</span>
                   <span>
-                    £{financialCalculations.monthlySolarBatteryLumoUtilityBill}
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.monthlySolarBatteryLumoUtilityBill,
+                    )}
                   </span>{' '}
                 </div>
 
                 <div className="flex justify-between border-t border-gray-100 pt-3">
                   <span>Total monthly bill</span>
                   <span>
-                    £{financialCalculations.monthlyOptimisedCombinedBill}
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.monthlyOptimisedCombinedBill,
+                    )}
                   </span>
                 </div>
 
@@ -183,18 +199,26 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between mt-2">
                   <span>Finance cost</span>
-                  <span>£{financialCalculations.monthlyFinanceBill}</span>
+                  <span>
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.monthlyFinanceBill,
+                    )}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Standard bill</span>
                   <span>
-                    £{financialCalculations.monthlySolarBatteryUtilityBill}
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.monthlySolarBatteryUtilityBill,
+                    )}
                   </span>
                 </div>
                 <div className="flex justify-between border-t border-gray-100 pt-3">
                   <span>Total monthly bill</span>
                   <span>
-                    £{financialCalculations.monthlyUnoptimisedCombinedBill}
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.monthlyUnoptimisedCombinedBill,
+                    )}
                   </span>
                 </div>
               </div>

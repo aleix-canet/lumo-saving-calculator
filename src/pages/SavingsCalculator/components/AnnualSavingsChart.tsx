@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import CountingSVGLabel from '../../../components/CountingSVGLabel';
 import { colors } from '../../../constants/colors';
 
 interface AnnualSavingsChartProps {
@@ -48,6 +49,8 @@ const AnnualSavingsChart = ({
         <BarChart
           data={data}
           margin={{ top: 64, right: 16, left: 16, bottom: 24 }}
+          barCategoryGap="20%"
+          barGap={0}
         >
           <XAxis
             dataKey="name"
@@ -66,23 +69,36 @@ const AnnualSavingsChart = ({
             }
           />
           <YAxis hide domain={[0, 1600]} />
-          <Bar dataKey="savings" radius={[6, 6, 0, 0]}>
+          <Bar dataKey="savings" radius={[6, 6, 6, 6]} stackId="overlay">
+            {data.map((entry, index) => (
+              <Cell key={`bar-${index}`} fill={entry.fill} />
+            ))}
+          </Bar>
+
+          {/* Labels: non-animated bar so labels render immediately & stay aligned */}
+          <Bar
+            dataKey={() => 0}
+            fill="transparent"
+            isAnimationActive={false}
+            radius={[6, 6, 0, 0]}
+            barSize={48}
+            stackId="overlay"
+          >
             <LabelList
               dataKey="savings"
               position="top"
-              dy={-12}
-              formatter={(label: React.ReactNode) =>
-                typeof label === 'number' ? `£${label}` : label
-              }
-              style={{
-                fill: '#18181b',
-                fontSize: isMobile ? '1.375rem' : '1.875rem',
-                fontWeight: 300,
-              }}
+              content={props => (
+                <CountingSVGLabel
+                  {...props}
+                  style={{
+                    fill: '#18181b',
+                    fontSize: isMobile ? '1.375rem' : '1.875rem',
+                    fontWeight: 300,
+                  }}
+                  duration={500}
+                />
+              )}
             />
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.fill} />
-            ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>

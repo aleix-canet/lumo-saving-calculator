@@ -1,26 +1,35 @@
 import { Tab, Tabs, type TabProps, type TabsProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { colors } from '../constants/colors';
 
 export const CustomTabs = styled((props: TabsProps) => <Tabs {...props} />)({
   minHeight: 'unset',
   '& .MuiTabs-indicator': {
-    height: '2px',
-    backgroundColor: colors.grey[600],
+    height: '3px',
+    backgroundColor: '#1FEA71',
+    width: 'fit-content',
+    left: 'unset',
+    right: 'unset',
   },
 });
 
 export const CustomTab = styled((props: TabProps) => (
   <Tab disableRipple disableFocusRipple disableTouchRipple {...props} />
 ))({
-  color: '#666', // inactive color
+  color: '#717680', // inactive color
   fontWeight: 400,
   fontSize: '1.125rem',
   textTransform: 'none',
-  paddingBottom: '4px',
+  paddingBottom: '12px',
   minHeight: 'unset',
+  minWidth: 'auto',
+  paddingLeft: 0,
+  paddingRight: 0,
+  marginRight: '16px',
+  '&:hover': {
+    color: '#1D1D1F',
+  },
   '&.Mui-selected': {
-    color: '#000', // active tab text
+    color: '#1D1D1F', // active tab text
   },
   '&:focus-visible': {
     outline: 'none',

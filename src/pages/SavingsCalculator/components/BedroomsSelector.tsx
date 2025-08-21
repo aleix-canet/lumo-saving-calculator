@@ -42,7 +42,7 @@ const BedroomSelector = () => {
   return (
     <>
       <span
-        className="text-gray-500 underline cursor-pointer text-xl md:text-3xl font-light"
+        className="text-gray-500 underline cursor-pointer text-xl md:text-3xl font-light whitespace-nowrap"
         onClick={handleOpen}
       >
         {numberOfBedrooms} bed
@@ -112,7 +112,7 @@ const BedroomSelector = () => {
           </div>
         </DialogContent>
 
-        <DialogActions className="justify-center mt-8">
+        <DialogActions className="justify-center">
           <button
             onClick={handleUpdate}
             className="w-auto px-8 py-4 md:py-5 bg-[#1FEA71]! rounded-[52px]"

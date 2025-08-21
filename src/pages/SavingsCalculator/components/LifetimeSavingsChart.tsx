@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import CountingSVGLabel from '../../../components/CountingSVGLabel';
 import { colors } from '../../../constants/colors';
 
 const LifetimeSavingsChart = ({
@@ -48,6 +49,7 @@ const LifetimeSavingsChart = ({
           data={data}
           margin={{ top: 64, right: 16, left: 16, bottom: 24 }}
           barCategoryGap="15%"
+          barGap={0}
         >
           <XAxis
             dataKey="name"
@@ -64,24 +66,36 @@ const LifetimeSavingsChart = ({
               } as unknown as React.SVGProps<SVGTextElement>
             }
           />
-          <YAxis hide domain={[0, 22000]} />
-          <Bar dataKey="savings" radius={[6, 6, 0, 0]}>
-            <LabelList
-              dataKey="savings"
-              position="top"
-              dy={-12}
-              formatter={(label: React.ReactNode) =>
-                typeof label === 'number' ? `£${label.toLocaleString()}` : label
-              }
-              style={{
-                fill: '#18181b',
-                fontSize: isMobile ? '1.375rem' : '1.875rem',
-                fontWeight: 300,
-              }}
-            />
+          <YAxis hide domain={[0, 30000]} />
+          <Bar dataKey="savings" radius={[6, 6, 6, 6]} stackId="overlay">
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />
             ))}
+          </Bar>
+          {/* Labels: non-animated bar so labels render immediately & stay aligned */}
+          <Bar
+            dataKey={() => 0}
+            fill="transparent"
+            isAnimationActive={false}
+            radius={[6, 6, 0, 0]}
+            barSize={48}
+            stackId="overlay"
+          >
+            <LabelList
+              dataKey="savings"
+              position="top"
+              content={props => (
+                <CountingSVGLabel
+                  {...props}
+                  style={{
+                    fill: '#18181b',
+                    fontSize: isMobile ? '1.375rem' : '1.875rem',
+                    fontWeight: 300,
+                  }}
+                  duration={500}
+                />
+              )}
+            />
           </Bar>
         </BarChart>
       </ResponsiveContainer>

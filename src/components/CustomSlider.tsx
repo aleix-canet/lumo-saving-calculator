@@ -15,6 +15,9 @@ export const CustomSlider = styled(Slider)<SliderProps>(() => ({
     '&:hover, &.Mui-focusVisible, &.Mui-active': {
       boxShadow: '0px 0px 6px rgba(0,0,0,0.25)',
     },
+    '&::before': {
+      boxShadow: 'none',
+    },
   },
   '& .MuiSlider-rail': {
     backgroundColor: '#e0e0e0',
