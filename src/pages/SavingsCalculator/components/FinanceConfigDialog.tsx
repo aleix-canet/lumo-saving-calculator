@@ -20,6 +20,8 @@ interface FinanceConfigDialogProps {
   totalSystemCost: number;
 }
 
+const financeYearOptions = [2, 3, 5, 10, 15];
+
 const FinanceConfigDialog = ({
   open,
   onClose,
@@ -114,30 +116,23 @@ const FinanceConfigDialog = ({
 
                 <div className="relative">
                   <CustomSlider
-                    value={yearsFinanced}
-                    onChange={(_, value) =>
-                      updateConfig('yearsFinanced', value as number)
+                    value={Math.max(
+                      0,
+                      financeYearOptions.indexOf(yearsFinanced),
+                    )}
+                    onChange={(_, idx) =>
+                      updateConfig(
+                        'yearsFinanced',
+                        financeYearOptions[idx as number],
+                      )
                     }
-                    marks={[
-                      {
-                        value: 2,
-                      },
-                      {
-                        value: 3,
-                      },
-                      {
-                        value: 5,
-                      },
-                      {
-                        value: 10,
-                      },
-                      {
-                        value: 15,
-                      },
-                    ]}
-                    min={2}
-                    max={15}
-                    step={null}
+                    marks={financeYearOptions.map((v, i) => ({
+                      value: i,
+                      label: v,
+                    }))}
+                    min={0}
+                    max={financeYearOptions.length - 1}
+                    step={1}
                     aria-label="Years Financed"
                     valueLabelDisplay="on"
                     valueLabelFormat={v =>
@@ -145,10 +140,10 @@ const FinanceConfigDialog = ({
                         <>
                           Years
                           <br />
-                          financed: {v}
+                          financed: {financeYearOptions[v as number]}
                         </>
                       ) : (
-                        `Years financed: ${v}`
+                        `Years financed: ${financeYearOptions[v as number]}`
                       )
                     }
                     className="my-5"

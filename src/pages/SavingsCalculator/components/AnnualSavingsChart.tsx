@@ -63,7 +63,7 @@ const AnnualSavingsChart = ({
                 fontSize: '1rem',
                 fontWeight: 500,
                 wordBreak: 'break-word',
-                width: 60,
+                width: 100,
                 lineHeight: 1.2,
               } as unknown as React.SVGProps<SVGTextElement>
             }
