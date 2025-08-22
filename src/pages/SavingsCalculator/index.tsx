@@ -48,7 +48,7 @@ const SavingsCalculator = () => {
   return (
     <div className="min-h-screen bg-white grid grid-rows-[auto_1fr] px-6 max-md:py-20">
       <main className="w-full flex justify-center">
-        <div className="w-full max-w-[1440px] px-6 md:px-[128px] md:pt-16">
+        <div className="w-full max-w-[1440px] px-6 md:px-[128px] md:pt-[128px]">
           <div className="md:pb-20 lg:pb-10 flex flex-col md:flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-between gap-12 md:gap-20 lg:gap-0 border-b border-gray-200">
             <div
               id="left-container"
