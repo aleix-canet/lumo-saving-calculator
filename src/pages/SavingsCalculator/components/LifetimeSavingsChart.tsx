@@ -1,4 +1,3 @@
-import { useMediaQuery, useTheme } from '@mui/material';
 import {
   Bar,
   BarChart,
@@ -16,9 +15,6 @@ const LifetimeSavingsChart = ({
 }: {
   lumoSolarAndBattery: number;
 }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
   const data = [
     {
       name: 'Year 5',
