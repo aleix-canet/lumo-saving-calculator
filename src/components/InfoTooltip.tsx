@@ -6,7 +6,7 @@ interface InfoTooltipProps {
 }
 
 const InfoTooltip = ({ title }: InfoTooltipProps) => (
-  <Tooltip title={title} arrow>
+  <Tooltip title={title} arrow placement="top">
     <HelpOutline
       fontSize="small"
       className="mx-2 text-zinc-400 cursor-pointer"
