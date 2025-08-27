@@ -89,7 +89,7 @@ const LifetimeSavingsChart = ({
                   {...props}
                   style={{
                     fill: '#18181b',
-                    fontSize: isMobile ? '1.375rem' : '1.875rem',
+                    fontSize: '1.375rem',
                     fontWeight: 300,
                   }}
                   duration={500}

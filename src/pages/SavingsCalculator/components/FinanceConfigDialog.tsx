@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { CustomSlider } from '../../../components/CustomSlider';
 import GetFreeQuoteButton from '../../../components/GetFreeQuoteButton';
+import InfoTooltip from '../../../components/InfoTooltip';
 import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 import { displayPositiveOrNegativeCurrency } from '../../../utils/currency';
 import type { FinancialcalculationsOutput } from '../utils';
@@ -64,27 +65,46 @@ const FinanceConfigDialog = ({
               </h2>
 
               <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
-                <div className="flex justify-between">
-                  <span>Total system cost</span>
-                  <span className="text-zinc-900">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span>Total system cost </span>
+                    <InfoTooltip title="The full price of your solar and battery system, including installation — an investment in lower bills for decades to come." />
+                  </div>
+                  <span className="text-zinc-900 whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(totalSystemCost)}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Deposit size</span>
-                  <span className="text-zinc-900">£{depositSize}</span>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span>Deposit size</span>
+                    <InfoTooltip title="The upfront payment you make towards the system. A larger deposit means smaller monthly repayments and quicker payback." />
+                  </div>
+                  <span className="text-zinc-900 whitespace-nowrap">
+                    £{depositSize}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Amount to be financed</span>
-                  <span className="text-zinc-900">
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span>Amount to be financed</span>
+                    <InfoTooltip title="The balance after your deposit — this is what you'll spread out into affordable monthly payments." />
+                  </div>
+                  <span className="text-zinc-900 whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
                       financialCalculations.financedAmount,
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Number of years financed</span>
-                  <span className="text-zinc-900">{yearsFinanced} years</span>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span>Number of years financed</span>
+                    <InfoTooltip title="The length of time you'll repay the system. Longer terms lower monthly costs, shorter terms pay it off faster." />
+                  </div>
+                  <span className="text-zinc-900 whitespace-nowrap">
+                    {yearsFinanced} years
+                  </span>
                 </div>
               </div>
 
@@ -161,27 +181,36 @@ const FinanceConfigDialog = ({
               </h2>
 
               <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
-                <div className="flex justify-between">
-                  <span>Finance cost</span>
-                  <span>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span>Finance cost</span>
+                    <InfoTooltip title="Your fixed monthly repayment for the system — turning your energy savings into an affordable investment." />
+                  </div>
+                  <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
                       financialCalculations.monthlyFinanceBill,
                     )}
                   </span>
                 </div>
 
-                <div className="flex justify-between bg-[#9FFFC6] px-3 py-1.5">
-                  <span>Lumo optimised bill</span>
-                  <span>
+                <div className="flex justify-between items-center bg-[#9FFFC6] px-3 py-1.5 w-full">
+                  <div className="flex items-center gap-2">
+                    <span>Lumo optimised bill</span>
+                    <InfoTooltip title="Your new electricity bill once Lumo's software cuts your grid use by up to 30% more than a standard system, potentially saving you 100% of your bill and making you money on top." />
+                  </div>
+                  <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
                       financialCalculations.monthlySolarBatteryLumoUtilityBill,
                     )}
-                  </span>{' '}
+                  </span>
                 </div>
 
-                <div className="flex justify-between border-t border-gray-100 pt-3">
-                  <span>Total monthly bill</span>
-                  <span>
+                <div className="flex justify-between items-center border-t border-gray-100 pt-3">
+                  <div className="flex items-center gap-2">
+                    <span>Total monthly bill</span>
+                    <InfoTooltip title="Finance + reduced bill = your total cost each month with Lumo — usually much lower than staying with your energy supplier." />
+                  </div>
+                  <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
                       financialCalculations.monthlyOptimisedCombinedBill,
                     )}
@@ -192,25 +221,36 @@ const FinanceConfigDialog = ({
                   Versus a standard system
                 </h3>
 
-                <div className="flex justify-between mt-2">
-                  <span>Finance cost</span>
-                  <span>
+                <div className="flex justify-between items-center mt-2">
+                  <div className="flex items-center gap-2">
+                    <span>Finance cost</span>
+                    <InfoTooltip title="Your monthly repayment for a standard solar and battery setup — the same system, but without Lumo's added savings." />
+                  </div>
+                  <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
                       financialCalculations.monthlyFinanceBill,
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Standard bill</span>
-                  <span>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span>Standard bill</span>
+                    <InfoTooltip title="Your likely electricity bill with a regular solar and battery system, before optimisation." />
+                  </div>
+                  <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
                       financialCalculations.monthlySolarBatteryUtilityBill,
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between border-t border-gray-100 pt-3">
-                  <span>Total monthly bill</span>
-                  <span>
+
+                <div className="flex justify-between items-center border-t border-gray-100 pt-3">
+                  <div className="flex items-center gap-2">
+                    <span>Total monthly bill</span>
+                    <InfoTooltip title="Finance + remaining energy bill with a standard system — usually higher than with Lumo because you miss out on the extra savings." />
+                  </div>
+                  <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
                       financialCalculations.monthlyUnoptimisedCombinedBill,
                     )}
