@@ -49,6 +49,7 @@ const AnnualSavingsChart = ({
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isCompact = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
     <div className="w-full max-w-sm h-[360px] pt-6 md:pt-0 mx-auto">
@@ -106,10 +107,10 @@ const AnnualSavingsChart = ({
             tick={
               {
                 fill: '#374151',
-                fontSize: '1rem',
+                fontSize: isCompact ? '0.75rem' : '1rem',
                 fontWeight: 500,
                 wordBreak: 'break-word',
-                width: 100,
+                width: isCompact ? 60 : 100,
                 lineHeight: 1.2,
               } as unknown as React.SVGProps<SVGTextElement>
             }
