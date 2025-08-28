@@ -99,7 +99,7 @@ export const mockedSavingsPermutations: SavingsCalculations[] = [
     baselineUtilityBill: 836,
     solarOnlyUtilityBill: 265,
     solarBatteryUtilityBill: 4,
-    solarBatteryLumoUtilityBill: 313,
+    solarBatteryLumoUtilityBill: -313,
     estimatedSystemPrice: 9000,
     depositPercentage: '0%',
     yearsFinanced: 10,

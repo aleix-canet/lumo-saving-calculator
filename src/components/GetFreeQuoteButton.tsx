@@ -15,7 +15,7 @@ const GetFreeQuoteButton = ({ className }: GetFreeQuoteButtonProps) => {
   });
 
   // TODO: Replace with actual URL for the external service
-  const url = `https://externalurl.com?${params.toString()}`;
+  const url = `https://lumoenergy.co.uk/free-quote?${params.toString()}`;
 
   return (
     <a

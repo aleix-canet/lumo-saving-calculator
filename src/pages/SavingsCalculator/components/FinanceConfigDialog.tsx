@@ -58,9 +58,9 @@ const FinanceConfigDialog = ({
 
       <DialogContent className="md:px-4!">
         <div className="px-11 md:px-14">
-          <div className="flex flex-col gap-10 md:flex-row md:gap-12">
+          <div className="flex flex-col gap-10 lg:flex-row md:gap-12">
             <div className="flex-1">
-              <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6">
+              <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6 lg:whitespace-nowrap">
                 Financing your Lumo system
               </h2>
 
@@ -176,7 +176,7 @@ const FinanceConfigDialog = ({
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="text-zinc-900 text-3xl font-light mb-6">
+              <h2 className="text-zinc-900 text-3xl font-light mb-6 lg:whitespace-nowrap">
                 Monthly bill with Lumo
               </h2>
 
@@ -217,7 +217,7 @@ const FinanceConfigDialog = ({
                   </span>
                 </div>
 
-                <h3 className="text-zinc-900 text-3xl font-light mt-6">
+                <h3 className="text-zinc-900 text-3xl font-light mt-6 lg:whitespace-nowrap">
                   Versus a standard system
                 </h3>
 
@@ -262,7 +262,7 @@ const FinanceConfigDialog = ({
         </div>
       </DialogContent>
 
-      <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:items-end!">
+      <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:mr-14 md:items-end!">
         <GetFreeQuoteButton />
         <button
           onClick={onClose}
