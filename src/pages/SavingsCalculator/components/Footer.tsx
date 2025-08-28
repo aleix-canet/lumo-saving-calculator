@@ -22,7 +22,7 @@ const Footer = ({ savingsData }: { savingsData: SavingsCalculations }) => {
     savingsData,
   );
   return (
-    <footer className="w-full flex justify-center">
+    <footer className="w-full flex flex-col items-center">
       <div className="w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-center">
         <button
           onClick={() => setIsOpenFinanceDialog(true)}
@@ -54,6 +54,21 @@ const Footer = ({ savingsData }: { savingsData: SavingsCalculations }) => {
         </button>
         <GetFreeQuoteButton />
       </div>
+      <p className="mt-8 text-gray-500 text-sm font-medium max-md:text-center">
+        Our calculations are validated by{' '}
+        <a className="underline!" href="https://epvs.co.uk" target="blank">
+          EPVS
+        </a>
+        . It's a national certification standard that validates energy-saving
+        estimates.{' '}
+        <a
+          href="https://lumoenergy.co.uk/calculations"
+          target="blank"
+          className="underline!"
+        >
+          See our calculations
+        </a>
+      </p>
       <FinanceConfigDialog
         open={isOpenFinanceDialog}
         onClose={() => setIsOpenFinanceDialog(false)}
