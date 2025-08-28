@@ -149,6 +149,7 @@ const SavingsCalculator = () => {
                       lumoSolarAndBattery={
                         financialCalculations.solarBatteryLumoSavings
                       }
+                      baselineUtilityBill={savingsData.baselineUtilityBill}
                     />
                   ) : (
                     <div className="text-center text-gray-400 text-sm w-full">

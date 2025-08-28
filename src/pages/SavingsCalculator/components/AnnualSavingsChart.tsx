@@ -4,24 +4,31 @@ import {
   BarChart,
   Cell,
   LabelList,
+  ReferenceLine,
   ResponsiveContainer,
   XAxis,
   YAxis,
 } from 'recharts';
 import CountingSVGLabel from '../../../components/CountingSVGLabel';
 import { colors } from '../../../constants/colors';
+import { useSystemConfig } from '../../../contexts/CalculatorConfigContext';
 
 interface AnnualSavingsChartProps {
   solarOnly: number;
   solarAndBattery: number;
   lumoSolarAndBattery: number;
+  baselineUtilityBill: number;
 }
 
 const AnnualSavingsChart = ({
   solarOnly,
   solarAndBattery,
   lumoSolarAndBattery,
+  baselineUtilityBill,
 }: AnnualSavingsChartProps) => {
+  const { config } = useSystemConfig();
+  const { numberOfBedrooms } = config;
+
   const data = [
     {
       name: 'Solar only',
@@ -48,10 +55,49 @@ const AnnualSavingsChart = ({
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          margin={{ top: 64, right: 16, left: 16, bottom: 24 }}
+          margin={{ top: 64, right: 16, left: 96, bottom: 24 }}
           barCategoryGap="20%"
           barGap={0}
         >
+          <ReferenceLine
+            y={baselineUtilityBill}
+            stroke="#D5D7DA"
+            strokeDasharray="4 4"
+            strokeWidth={2}
+            ifOverflow="visible"
+            label={({ viewBox }) => {
+              const y = viewBox?.y ?? 0;
+              const xInset = (viewBox?.x ?? 0) - 90;
+              return (
+                <g pointerEvents="none">
+                  <text
+                    x={xInset}
+                    y={y - 16}
+                    fill="#717680"
+                    fontFamily="Figtree"
+                    fontSize="14"
+                    fontStyle="normal"
+                    fontWeight="500"
+                    textAnchor="start"
+                  >
+                    £{Math.round(baselineUtilityBill).toLocaleString()} bill
+                  </text>
+                  <text
+                    x={xInset}
+                    y={y}
+                    fill="#717680"
+                    fontFamily="Figtree"
+                    fontSize="14"
+                    fontStyle="normal"
+                    fontWeight="500"
+                    textAnchor="start"
+                  >
+                    ( Avg. {numberOfBedrooms} bed )
+                  </text>
+                </g>
+              );
+            }}
+          />
           <XAxis
             dataKey="name"
             axisLine={false}
