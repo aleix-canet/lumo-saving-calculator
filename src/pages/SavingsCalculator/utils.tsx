@@ -76,19 +76,19 @@ export function calculateFinanceSummary(
     ),
     depositAmount: Number(depositAmount.toFixed(2)),
     financedAmount: Number(financedAmount.toFixed(2)),
-    monthlyFinanceBill: Number(monthlyFinanceBill.toFixed(2)),
+    monthlyFinanceBill: Math.round(Number(monthlyFinanceBill)),
     monthlyBaselineUtilityBill: Number(monthlyBaselineUtilityBill.toFixed(2)),
-    monthlySolarBatteryUtilityBill: Number(
-      monthlySolarBatteryUtilityBill.toFixed(2),
+    monthlySolarBatteryUtilityBill: Math.round(
+      Number(monthlySolarBatteryUtilityBill),
     ),
-    monthlySolarBatteryLumoUtilityBill: Number(
-      monthlySolarBatteryLumoUtilityBill.toFixed(2),
+    monthlySolarBatteryLumoUtilityBill: Math.round(
+      Number(monthlySolarBatteryLumoUtilityBill),
     ),
-    monthlyUnoptimisedCombinedBill: Number(
-      (monthlyFinanceBill + monthlySolarBatteryUtilityBill).toFixed(2),
+    monthlyUnoptimisedCombinedBill: Math.round(
+      Number(monthlyFinanceBill + monthlySolarBatteryUtilityBill),
     ),
-    monthlyOptimisedCombinedBill: Number(
-      (monthlyFinanceBill + monthlySolarBatteryLumoUtilityBill).toFixed(2),
+    monthlyOptimisedCombinedBill: Math.round(
+      Number(monthlyFinanceBill + monthlySolarBatteryLumoUtilityBill),
     ),
   };
 }

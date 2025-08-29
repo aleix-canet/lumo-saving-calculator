@@ -82,7 +82,9 @@ const FinanceConfigDialog = ({
                     <span>Paid upfront</span>
                   </div>
                   <span className="text-zinc-900 whitespace-nowrap">
-                    £{financialCalculations.depositAmount}
+                    {displayPositiveOrNegativeCurrency(
+                      financialCalculations.depositAmount,
+                    )}
                   </span>
                 </div>
 
