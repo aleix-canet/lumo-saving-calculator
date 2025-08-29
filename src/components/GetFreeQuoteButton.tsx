@@ -10,7 +10,7 @@ const GetFreeQuoteButton = ({ className }: GetFreeQuoteButtonProps) => {
     solarPanels: config.solarPanels.toString(),
     batterySize: config.batterySize.toString(),
     numberOfBedrooms: config.numberOfBedrooms.toString(),
-    depositSize: config.depositSize.toString(),
+    depositSize: config.depositPercentage.toString(),
     yearsFinanced: config.yearsFinanced.toString(),
   });
 

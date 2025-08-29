@@ -9,14 +9,14 @@ import FinanceConfigDialog from './FinanceConfigDialog';
 const Footer = ({ savingsData }: { savingsData: SavingsCalculations }) => {
   const [isOpenFinanceDialog, setIsOpenFinanceDialog] = useState(false);
   const { config } = useSystemConfig();
-  const { depositSize, yearsFinanced } = config;
+  const { depositPercentage, yearsFinanced } = config;
 
   const financialCalculations = calculateFinanceSummary(
     {
       solarPanels: savingsData.solarPanels,
       batterySize: savingsData.batterySize,
       bedrooms: savingsData.bedrooms,
-      depositPercentage: depositSize,
+      depositPercentage,
       yearsFinanced: yearsFinanced,
     },
     savingsData,

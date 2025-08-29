@@ -49,31 +49,48 @@ const AnnualSavingsChart = ({
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const isCompact = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
     <div className="w-full max-w-sm h-[360px] pt-6 md:pt-0 mx-auto">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          margin={{ top: 64, right: 16, left: 96, bottom: 24 }}
+          margin={{ top: 64, right: 16, left: 16, bottom: 24 }}
           barCategoryGap="20%"
           barGap={0}
         >
           <ReferenceLine
             y={baselineUtilityBill}
-            stroke="#D5D7DA"
+            stroke="#AAACAE"
             strokeDasharray="4 4"
             strokeWidth={2}
             ifOverflow="visible"
             label={({ viewBox }) => {
               const y = viewBox?.y ?? 0;
-              const xInset = (viewBox?.x ?? 0) - 90;
+              const x = viewBox?.x ?? 0;
               return (
                 <g pointerEvents="none">
+                  <line
+                    x1={x + 80}
+                    x2={x + 40}
+                    y1={y - 119}
+                    y2={y - 119}
+                    stroke="#AAACAE"
+                    strokeWidth={2}
+                    strokeDasharray="4 4"
+                  />
+                  <rect
+                    x={x + 32}
+                    y={y - 133}
+                    width={60}
+                    height={30}
+                    fill="none"
+                    stroke={'#E4E4E4'}
+                    strokeWidth={2}
+                  />
                   <text
-                    x={xInset}
-                    y={y - 16}
+                    x={x + 100}
+                    y={y - 120}
                     fill="#717680"
                     fontFamily="Figtree"
                     fontSize="14"
@@ -84,8 +101,8 @@ const AnnualSavingsChart = ({
                     £{Math.round(baselineUtilityBill).toLocaleString()} bill
                   </text>
                   <text
-                    x={xInset}
-                    y={y}
+                    x={x + 100}
+                    y={y - 104}
                     fill="#717680"
                     fontFamily="Figtree"
                     fontSize="14"
@@ -107,10 +124,10 @@ const AnnualSavingsChart = ({
             tick={
               {
                 fill: '#374151',
-                fontSize: isCompact ? '0.75rem' : '1rem',
+                fontSize: '1rem',
                 fontWeight: 500,
                 wordBreak: 'break-word',
-                width: isCompact ? 60 : 100,
+                width: 100,
                 lineHeight: 1.2,
               } as unknown as React.SVGProps<SVGTextElement>
             }

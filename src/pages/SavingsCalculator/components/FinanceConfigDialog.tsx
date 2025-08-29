@@ -30,7 +30,7 @@ const FinanceConfigDialog = ({
   totalSystemCost,
 }: FinanceConfigDialogProps) => {
   const { config, updateConfig } = useSystemConfig();
-  const { depositSize, yearsFinanced } = config;
+  const { depositPercentage, yearsFinanced } = config;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -50,14 +50,15 @@ const FinanceConfigDialog = ({
       }}
     >
       <IconButton
-        className="absolute! top-4 right-4 text-gray-400! bg-gray-500! hover:text-gray-600! hover:bg-gray-700! rounded-full mr-4! mt-5! w-8 h-8"
+        aria-label="Close"
+        className="absolute! top-4 right-4 text-gray-400! bg-gray-500! hover:text-gray-600! hover:bg-gray-700! rounded-full mr-4! md:mt-5! w-8 h-8"
         onClick={onClose}
       >
         <Close className="text-white" />
       </IconButton>
 
-      <DialogContent className="md:px-4!">
-        <div className="px-11 md:px-14">
+      <DialogContent className="px-4!">
+        <div className="">
           <div className="flex flex-col gap-10 lg:flex-row md:gap-12">
             <div className="flex-1">
               <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-4 md:mb-6 lg:whitespace-nowrap">
@@ -67,8 +68,8 @@ const FinanceConfigDialog = ({
               <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <span>Total system cost </span>
                     <InfoTooltip title="The full price of your solar and battery system, including installation — an investment in lower bills for decades to come." />
+                    <span>Total system cost </span>
                   </div>
                   <span className="text-zinc-900 whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(totalSystemCost)}
@@ -77,18 +78,18 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <span>Deposit size</span>
                     <InfoTooltip title="The upfront payment you make towards the system. A larger deposit means smaller monthly repayments and quicker payback." />
+                    <span>Paid upfront</span>
                   </div>
                   <span className="text-zinc-900 whitespace-nowrap">
-                    £{depositSize}
+                    £{financialCalculations.depositAmount}
                   </span>
                 </div>
 
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <span>Amount to be financed</span>
                     <InfoTooltip title="The balance after your deposit — this is what you'll spread out into affordable monthly payments." />
+                    <span>Amount financed</span>
                   </div>
                   <span className="text-zinc-900 whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
@@ -99,8 +100,8 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <span>Number of years financed</span>
                     <InfoTooltip title="The length of time you'll repay the system. Longer terms lower monthly costs, shorter terms pay it off faster." />
+                    <span>Years financed</span>
                   </div>
                   <span className="text-zinc-900 whitespace-nowrap">
                     {yearsFinanced} years
@@ -108,12 +109,12 @@ const FinanceConfigDialog = ({
                 </div>
               </div>
 
-              <div className="mt-10 max:lg:space-y-6">
+              <div className="px-11 md:px-14 mt-10 max:lg:space-y-6">
                 <div className="relative max-lg:mb-6">
                   <CustomSlider
-                    value={depositSize}
+                    value={depositPercentage}
                     onChange={(_, value) =>
-                      updateConfig('depositSize', value as number)
+                      updateConfig('depositPercentage', value as number)
                     }
                     min={0}
                     max={100}
@@ -123,7 +124,8 @@ const FinanceConfigDialog = ({
                       isTablet && (v === 0 || v === 100) ? (
                         <>
                           Deposit
-                          <br />${v}%
+                          <br />
+                          {v}%
                         </>
                       ) : (
                         `Deposit: ${v}%`
@@ -156,7 +158,8 @@ const FinanceConfigDialog = ({
                     aria-label="Years Financed"
                     valueLabelDisplay="on"
                     valueLabelFormat={v =>
-                      isTablet && (v === 2 || v === 15) ? (
+                      isTablet &&
+                      (v === 0 || v === financeYearOptions.length - 1) ? (
                         <>
                           Years
                           <br />
@@ -183,8 +186,8 @@ const FinanceConfigDialog = ({
               <div className="text-gray-700 text-base md:text-lg font-normal space-y-3">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <span>Finance cost</span>
                     <InfoTooltip title="Your fixed monthly repayment for the system — turning your energy savings into an affordable investment." />
+                    <span>Finance cost</span>
                   </div>
                   <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
@@ -193,10 +196,10 @@ const FinanceConfigDialog = ({
                   </span>
                 </div>
 
-                <div className="flex justify-between items-center bg-[#9FFFC6] px-3 py-1.5 w-full">
+                <div className="flex justify-between items-center bg-[#9FFFC6] py-1.5 w-full">
                   <div className="flex items-center gap-2">
-                    <span>Lumo optimised bill</span>
                     <InfoTooltip title="Your new electricity bill once Lumo's software cuts your grid use by up to 30% more than a standard system, potentially saving you 100% of your bill and making you money on top." />
+                    <span>Lumo optimised bill</span>
                   </div>
                   <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
@@ -207,8 +210,8 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between items-center border-t border-gray-100 pt-3">
                   <div className="flex items-center gap-2">
-                    <span>Total monthly bill</span>
                     <InfoTooltip title="Finance + reduced bill = your total cost each month with Lumo — usually much lower than staying with your energy supplier." />
+                    <span>Total monthly bill</span>
                   </div>
                   <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
@@ -223,8 +226,8 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between items-center mt-2">
                   <div className="flex items-center gap-2">
-                    <span>Finance cost</span>
                     <InfoTooltip title="Your monthly repayment for a standard solar and battery setup — the same system, but without Lumo's added savings." />
+                    <span>Finance cost</span>
                   </div>
                   <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
@@ -235,8 +238,8 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <span>Standard bill</span>
                     <InfoTooltip title="Your likely electricity bill with a regular solar and battery system, before optimisation." />
+                    <span>Standard bill</span>
                   </div>
                   <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
@@ -247,8 +250,8 @@ const FinanceConfigDialog = ({
 
                 <div className="flex justify-between items-center border-t border-gray-100 pt-3">
                   <div className="flex items-center gap-2">
-                    <span>Total monthly bill</span>
                     <InfoTooltip title="Finance + remaining energy bill with a standard system — usually higher than with Lumo because you miss out on the extra savings." />
+                    <span>Total monthly bill</span>
                   </div>
                   <span className="whitespace-nowrap">
                     {displayPositiveOrNegativeCurrency(
@@ -262,7 +265,7 @@ const FinanceConfigDialog = ({
         </div>
       </DialogContent>
 
-      <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:mr-14 md:items-end!">
+      <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:mr-14 md:items-end! bg-white shadow-[0_-10px_24px_rgba(0,0,0,0.06)]!">
         <GetFreeQuoteButton />
         <button
           onClick={onClose}

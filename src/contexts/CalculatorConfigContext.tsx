@@ -4,7 +4,7 @@ export type SystemConfig = {
   solarPanels: number;
   batterySize: number;
   numberOfBedrooms: number;
-  depositSize: number;
+  depositPercentage: number;
   yearsFinanced: number;
 };
 
@@ -20,7 +20,7 @@ export const defaultConfig: SystemConfig = {
   solarPanels: 12,
   batterySize: 10,
   numberOfBedrooms: 2,
-  depositSize: 0,
+  depositPercentage: 0,
   yearsFinanced: 10,
 };
 

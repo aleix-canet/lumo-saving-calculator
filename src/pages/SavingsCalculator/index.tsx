@@ -13,6 +13,11 @@ import Footer from './components/Footer';
 import LifetimeSavingsChart from './components/LifetimeSavingsChart';
 import { calculateFinanceSummary } from './utils';
 
+const minSolarPanels = 6;
+const maxSolarPanels = 14;
+const minBatterySize = 5;
+const maxBatterySize = 15;
+
 const SavingsCalculator = () => {
   const [chartTabIndex, setChartTabIndex] = useState(0);
 
@@ -22,7 +27,7 @@ const SavingsCalculator = () => {
     solarPanels,
     batterySize,
     numberOfBedrooms,
-    depositSize,
+    depositPercentage,
     yearsFinanced,
   } = config;
   const savingsData = useSavingsCalculations({
@@ -36,7 +41,7 @@ const SavingsCalculator = () => {
       solarPanels: savingsData.solarPanels,
       batterySize: savingsData.batterySize,
       bedrooms: savingsData.bedrooms,
-      depositPercentage: depositSize,
+      depositPercentage,
       yearsFinanced: yearsFinanced,
     },
     savingsData,
@@ -96,12 +101,13 @@ const SavingsCalculator = () => {
                 <AnimatedCustomSlider
                   targetValue={solarPanels}
                   onSliderChange={value => updateConfig('solarPanels', value)}
-                  min={6}
-                  max={14}
+                  min={minSolarPanels}
+                  max={maxSolarPanels}
                   step={2}
                   aria-label="Solar Panels"
                   valueLabelFormat={v =>
-                    isMobile && (v === 4 || v === 20) ? (
+                    isMobile &&
+                    (v === minSolarPanels || v === maxSolarPanels) ? (
                       <>
                         {v} solar
                         <br />
@@ -116,12 +122,13 @@ const SavingsCalculator = () => {
                 <AnimatedCustomSlider
                   targetValue={batterySize}
                   onSliderChange={value => updateConfig('batterySize', value)}
-                  min={5}
-                  max={15}
+                  min={minBatterySize}
+                  max={maxBatterySize}
                   step={5}
                   aria-label="Battery Size"
                   valueLabelFormat={v =>
-                    isMobile && (v === 5 || v === 40) ? (
+                    isMobile &&
+                    (v === minBatterySize || v === maxBatterySize) ? (
                       <>
                         {v} kWh
                         <br />
@@ -136,7 +143,7 @@ const SavingsCalculator = () => {
             </div>
             <div
               id="right-container"
-              className="w-full lg:w-1/2 flex justify-center mt-10 md:mt-6 lg:mt-0 lg:flex-1"
+              className="w-full lg:w-1/2 flex justify-center mt-20 md:mt-6 lg:mt-0 lg:flex-1"
             >
               <div className="w-full max-w-full md:max-w-sm h-[320px] flex flex-col justify-end">
                 <div className="flex-1 flex items-end">

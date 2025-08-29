@@ -1,14 +1,14 @@
 import { Tab, Tabs, type TabProps, type TabsProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const CustomTabs = styled((props: TabsProps) => <Tabs {...props} />)({
+export const CustomTabs = styled((props: TabsProps) => (
+  <Tabs {...props} variant="fullWidth" />
+))({
   minHeight: 'unset',
+  overflow: 'visible',
   '& .MuiTabs-indicator': {
     height: '3px',
     backgroundColor: '#1FEA71',
-    width: 'fit-content',
-    left: 'unset',
-    right: 'unset',
   },
 });
 
