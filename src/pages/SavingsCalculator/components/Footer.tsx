@@ -43,7 +43,7 @@ const Footer = ({ savingsData }: { savingsData: SavingsCalculations }) => {
           className="bg-white!"
         >
           <span className="text-gray-700 hover:text-black text-lg md:text-lg font-normal underline">
-            Monthly bill cost:
+            Net Monthly bill:
           </span>
           <span className="text-zinc-900 text-lg md:text-lg font-normal">
             {' '}
