@@ -139,6 +139,7 @@ const AnnualSavingsChart = ({
                     fontSize: isMobile ? '1.375rem' : '1.875rem',
                     fontWeight: 300,
                   }}
+                  withBackground
                   duration={500}
                 />
               )}
