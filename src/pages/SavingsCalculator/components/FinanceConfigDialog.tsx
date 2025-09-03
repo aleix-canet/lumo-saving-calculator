@@ -269,7 +269,9 @@ const FinanceConfigDialog = ({
         </div>
       </DialogContent>
 
-      <DialogActions className="flex flex-col gap-4 mt-6 md:mt-0 pt-6! px-4! md:items-end! bg-white shadow-[inset_0_1px_0_rgba(0,0,0,0.08)]!">
+      <DialogActions className="flex flex-col gap-4 mt-6 md:mt-0 pt-6! px-4! md:items-end! bg-white relative">
+        <div className="absolute top-0 left-4 right-4 h-px shadow-sm" />
+
         <GetFreeQuoteButton />
         <button
           onClick={onClose}
