@@ -19,7 +19,7 @@ const InfoTooltip = ({ title }: InfoTooltipProps) => {
 
   useEffect(() => {
     if (!open) return;
-    const id = setTimeout(() => setOpen(false), 2000);
+    const id = setTimeout(() => setOpen(false), 3500);
     return () => clearTimeout(id);
   }, [open]);
 

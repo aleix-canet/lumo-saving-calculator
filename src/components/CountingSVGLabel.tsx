@@ -7,6 +7,7 @@ type CountingSVGLabelProps = {
   value?: number | string;
   style: React.CSSProperties;
   duration?: number;
+  withBackground?: boolean;
 };
 const CountingSVGLabel = ({
   x = 0,
@@ -15,6 +16,7 @@ const CountingSVGLabel = ({
   value = 0,
   style,
   duration = 500,
+  withBackground = false,
 }: CountingSVGLabelProps) => {
   const toNum = (v: number | string | undefined, fallback = 0) => {
     const n = typeof v === 'number' ? v : Number(v);
@@ -25,6 +27,13 @@ const CountingSVGLabel = ({
 
   const [display, setDisplay] = useState(0);
   const prev = useRef<number>(0);
+  const textRef = useRef<SVGTextElement | null>(null);
+  const [bgBox, setBgBox] = useState<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  } | null>(null);
 
   useEffect(() => {
     const from = prev.current ?? 0;
@@ -48,15 +57,46 @@ const CountingSVGLabel = ({
   const ny = toNum(y, 0);
   const w = toNum(width, 0);
 
+  // Measure background box whenever the displayed text changes
+  useEffect(() => {
+    if (!withBackground) return;
+    const el = textRef.current;
+    if (!el) return;
+    try {
+      const box = el.getBBox();
+      setBgBox({ x: box.x, y: box.y, width: box.width, height: box.height });
+    } catch {
+      // getBBox can throw if element not in DOM yet
+    }
+  }, [display, withBackground, style?.fontSize, style?.fontWeight]);
+
+  const textX = nx + w / 2;
+  const textY = ny - 12;
+  const BG_COLOR = 'white';
+  const BG_PADDING_X = 4; // horizontal padding
+  const BG_PADDING_Y = 0; // vertical padding to keep box height tight
+
   return (
-    <text
-      x={nx + w / 2}
-      y={ny - 12}
-      textAnchor="middle"
-      style={{ ...style, pointerEvents: 'none' }}
-    >
-      £{Math.round(display).toLocaleString()}
-    </text>
+    <g pointerEvents="none">
+      {withBackground && bgBox && (
+        <rect
+          x={bgBox.x - BG_PADDING_X}
+          y={bgBox.y - BG_PADDING_Y}
+          width={bgBox.width + BG_PADDING_X * 2}
+          height={bgBox.height + BG_PADDING_Y * 2}
+          fill={BG_COLOR}
+        />
+      )}
+      <text
+        ref={textRef}
+        x={textX}
+        y={textY}
+        textAnchor="middle"
+        style={{ ...style, pointerEvents: 'none' }}
+      >
+        £{Math.round(display).toLocaleString()}
+      </text>
+    </g>
   );
 };
 

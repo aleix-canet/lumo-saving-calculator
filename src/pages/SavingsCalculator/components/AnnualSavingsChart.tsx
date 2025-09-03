@@ -71,7 +71,7 @@ const AnnualSavingsChart = ({
               return (
                 <g pointerEvents="none">
                   <line
-                    x1={x + 80}
+                    x1={x}
                     x2={x + 40}
                     y1={y - 119}
                     y2={y - 119}
@@ -79,18 +79,9 @@ const AnnualSavingsChart = ({
                     strokeWidth={2}
                     strokeDasharray="4 4"
                   />
-                  <rect
-                    x={x + 32}
-                    y={y - 133}
-                    width={60}
-                    height={30}
-                    fill="none"
-                    stroke={'#E4E4E4'}
-                    strokeWidth={2}
-                  />
                   <text
-                    x={x + 100}
-                    y={y - 120}
+                    x={x + 45}
+                    y={y - 115}
                     fill="#717680"
                     fontFamily="Figtree"
                     fontSize="14"
@@ -98,19 +89,8 @@ const AnnualSavingsChart = ({
                     fontWeight="500"
                     textAnchor="start"
                   >
-                    £{Math.round(baselineUtilityBill).toLocaleString()} bill
-                  </text>
-                  <text
-                    x={x + 100}
-                    y={y - 104}
-                    fill="#717680"
-                    fontFamily="Figtree"
-                    fontSize="14"
-                    fontStyle="normal"
-                    fontWeight="500"
-                    textAnchor="start"
-                  >
-                    ( Avg. {numberOfBedrooms} bed )
+                    £{Math.round(baselineUtilityBill).toLocaleString()} bill (
+                    Avg. {numberOfBedrooms} bed )
                   </text>
                 </g>
               );
@@ -159,6 +139,7 @@ const AnnualSavingsChart = ({
                     fontSize: isMobile ? '1.375rem' : '1.875rem',
                     fontWeight: 300,
                   }}
+                  withBackground
                   duration={500}
                 />
               )}

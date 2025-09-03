@@ -51,10 +51,12 @@ const FinanceConfigDialog = ({
     >
       <IconButton
         aria-label="Close"
-        className="absolute! top-4 right-4 text-gray-400! bg-gray-500! hover:text-gray-600! hover:bg-gray-700! rounded-full mr-4! md:mt-5! w-8 h-8"
+        className="absolute! top-4 right-4 size-12 md:size-8 rounded-full mr-2! -mt-2! md:mr-5! md:mt-5!"
         onClick={onClose}
       >
-        <Close className="text-white" />
+        <span className="flex items-center justify-center p-1 rounded-full bg-gray-500 hover:bg-gray-700">
+          <Close className="text-white" />
+        </span>
       </IconButton>
 
       <DialogContent className="px-4!">
@@ -181,7 +183,7 @@ const FinanceConfigDialog = ({
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="text-zinc-900 text-3xl font-light mb-6 lg:whitespace-nowrap">
+              <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mb-6 lg:whitespace-nowrap">
                 Monthly bill with Lumo
               </h2>
 
@@ -222,9 +224,9 @@ const FinanceConfigDialog = ({
                   </span>
                 </div>
 
-                <h3 className="text-zinc-900 text-3xl font-light mt-6 lg:whitespace-nowrap">
+                <h2 className="text-zinc-900 text-2xl md:text-3xl font-light mt-6 lg:whitespace-nowrap">
                   Versus a standard system
-                </h3>
+                </h2>
 
                 <div className="flex justify-between items-center mt-2">
                   <div className="flex items-center gap-2">
@@ -267,7 +269,9 @@ const FinanceConfigDialog = ({
         </div>
       </DialogContent>
 
-      <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:mr-14 md:items-end! bg-white shadow-[0_-10px_24px_rgba(0,0,0,0.06)]!">
+      <DialogActions className="flex flex-col gap-4 mt-6 md:mt-0 pt-6! px-4! md:items-end! bg-white relative">
+        <div className="absolute top-0 left-4 right-4 h-px shadow-sm" />
+
         <GetFreeQuoteButton />
         <button
           onClick={onClose}
