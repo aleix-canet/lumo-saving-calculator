@@ -51,7 +51,7 @@ const FinanceConfigDialog = ({
     >
       <IconButton
         aria-label="Close"
-        className="absolute! top-4 right-4 size-12 md:size-8 rounded-full mr-2! -mt-2! md:mr-4! md:mt-5!"
+        className="absolute! top-4 right-4 size-12 md:size-8 rounded-full mr-2! -mt-2! md:mr-5! md:mt-5!"
         onClick={onClose}
       >
         <span className="flex items-center justify-center p-1 rounded-full bg-gray-500 hover:bg-gray-700">
@@ -269,7 +269,7 @@ const FinanceConfigDialog = ({
         </div>
       </DialogContent>
 
-      <DialogActions className="flex flex-col gap-4 mt-6 px-4 md:px-8 md:mr-14 md:items-end! bg-white shadow-[inset_0_1px_0_rgba(0,0,0,0.08)]!">
+      <DialogActions className="flex flex-col gap-4 mt-6 md:mt-0 pt-6! px-4! md:items-end! bg-white shadow-[inset_0_1px_0_rgba(0,0,0,0.08)]!">
         <GetFreeQuoteButton />
         <button
           onClick={onClose}
